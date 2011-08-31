@@ -10,7 +10,7 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-"Useful stuffs
+"Useful stuff
 set nocompatible "No compatibility with old vi mode
 set modelines=0 "Avoid some kind of exploits... better let it be
 "Remove search highlights easily
@@ -23,6 +23,8 @@ vnoremap <tab> %
 "Set up and down keys to move by screen line and not file line
 nnoremap j gj 
 nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
 
 "Compensate for errors when running commands
 nnoremap ; :
@@ -47,3 +49,21 @@ if has("gui_running")
     set guioptions=egmrt
 endif
 
+"'Normal' tab control bindings
+"Normal, visual, select and operator-pending modes
+nnoremap <C-Tab> gt
+nnoremap <C-S-Tab> gT
+vnoremap <C-Tab> gt
+vnoremap <C-S-Tab> gT
+onoremap <C-Tab> gt
+onoremap <C-S-Tab> gT
+"Insert mode
+inoremap <C-Tab> <C-o>gt
+inoremap <C-S-Tab> <C-o>gT
+
+"****************** PLUGINS *****************
+"Show/Hide NERDTree
+command NT NERDTreeToggle
+
+"Show/Hide Gundo undo graph
+nnoremap <F5> :GundoToggle<CR>
