@@ -4,6 +4,9 @@ set ic "Ignore case in search
 set smartcase "Smart case in searches: lowercase: ignore, 1+ uppercase chars, case sensitive
 set is "Incremental search
 set showmatch "Show search match
+set ffs=mac,unix,dos "Allow all file formats
+set undofile "Create undo file for each edited file
+set gdefault
 
 "Load Pathogen bundle manager
 filetype off
@@ -13,8 +16,13 @@ filetype plugin indent on
 "Useful stuff
 set nocompatible "No compatibility with old vi mode
 set modelines=0 "Avoid some kind of exploits... better let it be
+
 "Remove search highlights easily
 nnoremap <leader><space> :noh<cr> 
+
+"Easy block matching
+nnoremap <tab> %
+vnoremap <tab> %
 
 "Set tabs to match blocks
 nnoremap <tab> % 
@@ -28,6 +36,14 @@ nnoremap <Up> gk
 
 "Compensate for errors when running commands
 nnoremap ; :
+command W :w
+command Q :q
+
+let mapleader = ',' "Leader key is easier at , than \
+
+"Fix horrible, horrible regex literal char handling
+nnoremap / /\v
+vnoremap / /\v
 
 "Colors
 syntax enable
