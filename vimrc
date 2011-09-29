@@ -51,7 +51,7 @@ set background=dark
 colorscheme solarized
 
 "Better way to work with splits
-nnoremap <leader>w <C-w>v<C-w>l
+"nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -83,3 +83,28 @@ command NT NERDTreeToggle
 
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
+
+"************* VIMWIKI SETTINGS *************
+
+let g:vimwiki_list = [
+\	{
+\		'maxhi': 1,
+\		'css_name': 'style.css',
+\		'auto_export': 0,
+\		'diary_index': 'diary',
+\		'template_default': 'default',
+\		'nested_syntaxes': {},
+\		'path': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/',
+\		'diary_link_fmt': '%Y-%m-%d',
+\		'template_ext': '.html',
+\		'diary_link_count': 4,
+\		'syntax': 'default',
+\		'index': 'index',
+\		'diary_header': 'Diary',
+\		'ext': '.wiki',
+\		'path_html': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html',
+\		'temp': 0,
+\		'template_path': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html',
+\		'diary_rel_path': 'diary/'
+\	}
+\]
