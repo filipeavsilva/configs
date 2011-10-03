@@ -7,6 +7,7 @@ set showmatch "Show search match
 set ffs=mac,unix,dos "Allow all file formats
 set undofile "Create undo file for each edited file
 set gdefault
+set so=7 "Scroll when cursor is 7 lines before the window edge
 
 "Load Pathogen bundle manager
 filetype off
@@ -18,7 +19,10 @@ set nocompatible "No compatibility with old vi mode
 set modelines=0 "Avoid some kind of exploits... better let it be
 
 "Remove search highlights easily
-nnoremap <leader><space> :noh<cr> 
+let mapleader = ',' "Leader key is easier at , than \
+let g:mapleader = ',' 
+
+nnoremap <leader><Space> :noh<Cr> 
 
 "Easy block matching
 nnoremap <tab> %
@@ -38,8 +42,6 @@ nnoremap <Up> gk
 nnoremap ; :
 command W :w
 command Q :q
-
-let mapleader = ',' "Leader key is easier at , than \
 
 "Fix horrible, horrible regex literal char handling
 nnoremap / /\v
@@ -77,6 +79,11 @@ onoremap <C-S-Tab> gT
 inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
+"****************** Cope *************************************
+map <leader>cc :botright cope<cr>
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+
 "****************** PLUGINS *****************
 "Show/Hide NERDTree
 command NT NERDTreeToggle
@@ -85,26 +92,26 @@ command NT NERDTreeToggle
 nnoremap <F5> :GundoToggle<CR>
 
 "************* VIMWIKI SETTINGS *************
+"Thesis wiki options
 
-let g:vimwiki_list = [
-\	{
-\		'maxhi': 1,
-\		'css_name': 'style.css',
-\		'auto_export': 0,
-\		'diary_index': 'diary',
-\		'template_default': 'default',
-\		'nested_syntaxes': {},
-\		'path': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/',
-\		'diary_link_fmt': '%Y-%m-%d',
-\		'template_ext': '.html',
-\		'diary_link_count': 4,
-\		'syntax': 'default',
-\		'index': 'index',
-\		'diary_header': 'Diary',
-\		'ext': '.wiki',
-\		'path_html': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html',
-\		'temp': 0,
-\		'template_path': '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html',
-\		'diary_rel_path': 'diary/'
-\	}
-\]
+let thesiswiki = {}
+let thesiswiki.maxhi = 1
+let thesiswiki.css_name = 'style.css'
+let thesiswiki.auto_export = 1
+let thesiswiki.diary_index = 'diary'
+let thesiswiki.template_default = 'default'
+let thesiswiki.nested_syntaxes = {}
+let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
+let thesiswiki.diary_link_fmt = '%Y-%m-%d'
+let thesiswiki.template_ext = '.html'
+let thesiswiki.diary_link_count = 4
+let thesiswiki.syntax = 'default'
+let thesiswiki.index = 'index'
+let thesiswiki.diary_header = 'Diary'
+let thesiswiki.ext = '.wiki'
+let thesiswiki.path_html = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html'
+let g:vimwiki_list = [thesiswiki]
+
+
+"Relative line numbering
+set rnu
