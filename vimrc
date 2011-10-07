@@ -18,11 +18,25 @@ filetype plugin indent on
 set nocompatible "No compatibility with old vi mode
 set modelines=0 "Avoid some kind of exploits... better let it be
 
-"Remove search highlights easily
 let mapleader = ',' "Leader key is easier at , than \
 let g:mapleader = ',' 
 
+"Remove search highlights easily
 nnoremap <leader><Space> :noh<Cr> 
+
+"Toggle relative line numbers easily (since they're unset automatically
+"sometimes)
+fu! ToggleRNU()
+				if &rnu
+								set number	"Set normal line numbers
+				else
+								set rnu			"Set relative line numbers
+				endif
+endfunction
+
+nnoremap <leader>r call ToggleRNU()
+vnoremap <leader>r call ToggleRNU()
+inoremap <leader>r call ToggleRNU()
 
 "Easy block matching
 nnoremap <tab> %
@@ -93,25 +107,38 @@ nnoremap <F5> :GundoToggle<CR>
 
 "************* VIMWIKI SETTINGS *************
 "Thesis wiki options
-
-let thesiswiki = {}
-let thesiswiki.maxhi = 1
-let thesiswiki.css_name = 'style.css'
-let thesiswiki.auto_export = 1
-let thesiswiki.diary_index = 'diary'
-let thesiswiki.template_default = 'default'
-let thesiswiki.nested_syntaxes = {}
-let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
-let thesiswiki.diary_link_fmt = '%Y-%m-%d'
-let thesiswiki.template_ext = '.html'
-let thesiswiki.diary_link_count = 4
-let thesiswiki.syntax = 'default'
-let thesiswiki.index = 'index'
-let thesiswiki.diary_header = 'Diary'
-let thesiswiki.ext = '.wiki'
-let thesiswiki.path_html = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html'
-let g:vimwiki_list = [thesiswiki]
-
+"(for mac only)
+if has("win32") == 0
+	let thesiswiki = {}
+	let thesiswiki.maxhi = 1
+	let thesiswiki.css_name = 'style.css'
+	let thesiswiki.auto_export = 1
+	let thesiswiki.diary_index = 'diary'
+	let thesiswiki.template_default = 'default'
+	let thesiswiki.nested_syntaxes = {}
+	let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
+	let thesiswiki.diary_link_fmt = '%Y-%m-%d'
+	let thesiswiki.template_ext = '.html'
+	let thesiswiki.diary_link_count = 4
+	let thesiswiki.syntax = 'default'
+	let thesiswiki.index = 'index'
+	let thesiswiki.diary_header = 'Diary'
+	let thesiswiki.ext = '.wiki'
+	let thesiswiki.path_html = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html'
+	let g:vimwiki_list = [thesiswiki]
+endif
 
 "Relative line numbering
 set rnu
+
+set ts=2 "Set tabstop to 2 (tabs have a length of 2 spaces)
+set encoding=utf-8
+set autoread
+
+"Windows-specific stuff
+"set base directory in windows (mac already has this set correctly)
+if has("win32")
+	cd ~
+	set bs=2
+	set gfn=Courier_New:h9:cANSI
+endif
