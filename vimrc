@@ -8,6 +8,8 @@ set ffs=mac,unix,dos "Allow all file formats
 set undofile "Create undo file for each edited file
 set gdefault
 set so=7 "Scroll when cursor is 7 lines before the window edge
+set ruler "always show the ruler
+set showcmd "Show incomplete commands next to the ruler
 
 "Load Pathogen bundle manager
 filetype off
@@ -47,7 +49,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 "Set up and down keys to move by screen line and not file line
-nnoremap j gj 
+nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
@@ -114,10 +116,11 @@ if has("win32") == 0
 	let thesiswiki.css_name = 'style.css'
 	let thesiswiki.auto_export = 1
 	let thesiswiki.diary_index = 'diary'
-	let thesiswiki.template_default = 'default'
 	let thesiswiki.nested_syntaxes = {}
 	let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
 	let thesiswiki.diary_link_fmt = '%Y-%m-%d'
+	let thesiswiki.template_path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/templates'
+	let thesiswiki.template_default = 'navigation_links.html'
 	let thesiswiki.template_ext = '.html'
 	let thesiswiki.diary_link_count = 4
 	let thesiswiki.syntax = 'default'
