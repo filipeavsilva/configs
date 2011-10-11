@@ -36,9 +36,9 @@ fu! ToggleRNU()
 				endif
 endfunction
 
-nnoremap <leader>r call ToggleRNU()
-vnoremap <leader>r call ToggleRNU()
-inoremap <leader>r call ToggleRNU()
+nnoremap <leader>r :call ToggleRNU()<CR>
+vnoremap <leader>r :call ToggleRNU()<CR>
+inoremap <leader>r :call ToggleRNU()<CR>
 
 "Easy block matching
 nnoremap <tab> %
@@ -76,7 +76,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "Show line numbers
-set number
+"set number
 
 "Hide toolbar in GUI mode
 if has("gui_running")
