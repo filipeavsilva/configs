@@ -144,4 +144,5 @@ if has("win32")
 	cd ~
 	set bs=2
 	set gfn=Courier_New:h9:cANSI
+	au GUIEnter * simalt ~x "maximize window
 endif
