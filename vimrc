@@ -10,6 +10,7 @@ set gdefault
 set so=7 "Scroll when cursor is 7 lines before the window edge
 set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
+set cursorline "Highlight the current line
 
 "Load Pathogen bundle manager
 filetype off
