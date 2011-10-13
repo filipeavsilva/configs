@@ -145,5 +145,8 @@ if has("win32")
 	cd ~
 	set bs=2
 	set gfn=Courier_New:h9:cANSI
-	au GUIEnter * simalt ~x "maximize window
+	"au GUIEnter * simalt ~x "maximize window
+	set lines=41
+	set columns=124		
+	winpos 6 29
 endif
