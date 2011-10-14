@@ -111,7 +111,7 @@ nnoremap <F5> :GundoToggle<CR>
 "************* VIMWIKI SETTINGS *************
 "Thesis wiki options
 "(for mac only)
-if has("win32") == 0
+if has("mac")
 	let thesiswiki = {}
 	let thesiswiki.maxhi = 1
 	let thesiswiki.css_name = 'style.css'
@@ -135,9 +135,11 @@ endif
 "Relative line numbering
 set rnu
 
-set ts=2 "Set tabstop to 2 (tabs have a length of 2 spaces)
+set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
+set shiftwidth=2 		"Set autoindent spaces to 2
 set encoding=utf-8
-set autoread
+set autoread				"Auto-load external changes to files
+set cindent					"Let's try this for now and see how it goes...
 
 "Windows-specific stuff
 "set base directory in windows (mac already has this set correctly)
