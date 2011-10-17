@@ -117,7 +117,7 @@ if has("mac")
 	let thesiswiki.css_name = 'style.css'
 	let thesiswiki.auto_export = 1
 	let thesiswiki.diary_index = 'diary'
-	let thesiswiki.nested_syntaxes = {}
+	let thesiswiki.nested_syntaxes = {'bibtex': 'bib'}
 	let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
 	let thesiswiki.diary_link_fmt = '%Y-%m-%d'
 	let thesiswiki.template_path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/templates'
