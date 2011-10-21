@@ -13,6 +13,7 @@ set showcmd "Show incomplete commands next to the ruler
 set cursorline "Highlight the current line
 
 "Load Pathogen bundle manager
+filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
