@@ -163,3 +163,15 @@ set grepprg=grep\ -nH\ $*
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+"Backup file cleaning
+
+"if has("win32")
+"	silent execute '!mkdir ~\_backupdir'
+"	set backupdir=~\\_backupdir\\
+"	set directory=~\\_backupdir\\
+"else "mac, unix
+"	set backupdir=~/.vimbackups//
+"	set directory=~/.vimbackups//
+"endif
+
