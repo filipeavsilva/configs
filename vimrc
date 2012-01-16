@@ -12,6 +12,12 @@ set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
 set cursorline "Highlight the current line
 
+if has("gui")
+	"Don't stretch window horizontally in fullscreen mode
+	"Set the backgroud color in fullscreen
+	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
+endif
+
 "Load Pathogen bundle manager
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
@@ -41,6 +47,21 @@ endfunction
 nnoremap <leader>r :call ToggleRNU()<CR>
 vnoremap <leader>r :call ToggleRNU()<CR>
 inoremap <leader>r :call ToggleRNU()<CR>
+
+"Toggle fullscreen
+fu! ToggleFU()
+	if &fullscreen
+		set nofu
+		set guioptions+=r "add scrollbar
+	else
+		set fu
+		set guioptions-=r "remove scrollbar
+	endif
+endfunction
+
+nnoremap <M-Return> :call ToggleFU()<CR>
+vnoremap <M-Return> :call ToggleFU()<CR>
+inoremap <M-Return> :call ToggleFU()<CR>
 
 "Easy block matching
 nnoremap <tab> %
