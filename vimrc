@@ -109,6 +109,9 @@ command NT NERDTreeToggle
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
 
+"Change Yankring history file location
+let g:yankring_history_file = '.vim.yankring_history'
+
 "************* VIMWIKI SETTINGS *************
 "Thesis wiki options
 "(for mac only)
