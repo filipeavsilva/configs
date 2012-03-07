@@ -1,6 +1,15 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+#Stuff added to PATH
+
+# this one because of macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/man:$MANPATH
+
+#Aliases
+alias ssh_sigma="ssh ist155321@sigma.ist.utl.pt"
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each

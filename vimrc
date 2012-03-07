@@ -1,3 +1,5 @@
+"set verbose=9
+
 "Misc options
 set hls "Highlight search
 set ic "Ignore case in search
@@ -11,6 +13,12 @@ set so=7 "Scroll when cursor is 7 lines before the window edge
 set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
 set cursorline "Highlight the current line
+set rnu "Relative line numbering 
+set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
+set shiftwidth=2 		"Set autoindent spaces to 2
+set encoding=utf-8
+set autoread				"Auto-load external changes to files
+set cindent					"Let's try this for now and see how it goes...
 
 if has("gui")
 	"Don't stretch window horizontally in fullscreen mode
@@ -46,7 +54,6 @@ endfunction
 
 nnoremap <leader>r :call ToggleRNU()<CR>
 vnoremap <leader>r :call ToggleRNU()<CR>
-inoremap <leader>r :call ToggleRNU()<CR>
 
 "Toggle fullscreen
 fu! ToggleFU()
@@ -61,7 +68,6 @@ endfunction
 
 nnoremap <M-Return> :call ToggleFU()<CR>
 vnoremap <M-Return> :call ToggleFU()<CR>
-inoremap <M-Return> :call ToggleFU()<CR>
 
 "Easy block matching
 nnoremap <tab> %
@@ -118,6 +124,10 @@ onoremap <C-S-Tab> gT
 inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
+"Set spelling automatically for certain file types
+autocmd FileType tex setlocal spell "latex
+autocmd BufNewFile,BufRead *.txt setlocal spell
+
 "****************** Cope *************************************
 map <leader>cc :botright cope<cr>
 map <leader>n :cn<cr>
@@ -157,14 +167,6 @@ if has("mac")
 	let g:vimwiki_list = [thesiswiki]
 endif
 
-"Relative line numbering
-set rnu
-
-set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
-set shiftwidth=2 		"Set autoindent spaces to 2
-set encoding=utf-8
-set autoread				"Auto-load external changes to files
-set cindent					"Let's try this for now and see how it goes...
 
 "Windows-specific stuff
 "set base directory in windows (mac already has this set correctly)
