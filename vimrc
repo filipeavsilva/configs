@@ -18,7 +18,7 @@ set encoding=utf-8
 set autoread				"Auto-load external changes to files
 set cindent					"Let's try this for now and see how it goes...
 
-if has("gui")
+if has("mac") && has("gui") "Options for MacVim
 	"Don't stretch window horizontally in fullscreen mode
 	"Set the backgroud color in fullscreen
 	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
