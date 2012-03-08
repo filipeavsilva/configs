@@ -1,5 +1,3 @@
-"set verbose=9
-
 "Misc options
 set hls "Highlight search
 set ic "Ignore case in search
@@ -201,3 +199,11 @@ let g:tex_flavor='latex'
 "	set directory=~/.vimbackups//
 "endif
 
+"Load Timeline stuff
+if has("win32")
+	so $HOME/vimfiles/bundle/timeline/timeline.vim
+else
+	so $HOME/.vim/bundle/timeline/timeline.vim
+endif
+"Timeline mappings
+nnoremap <leader>m :call TimelineEntry()<cr>
