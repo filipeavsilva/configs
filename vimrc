@@ -188,6 +188,11 @@ set grepprg=grep\ -nH\ $*
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
+"Set LaTeX viewer
+if has("unix") && match(system("uname"),'Darwin') != -1
+    " It's a Mac!
+    let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
+endif     
 "Backup file cleaning
 
 "if has("win32")
