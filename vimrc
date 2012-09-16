@@ -1,3 +1,7 @@
+"Useful stuff
+set nocompatible "No compatibility with old vi mode
+set modelines=0 "Avoid some kind of exploits... better let it be
+
 "Misc options
 set hls "Highlight search
 set ic "Ignore case in search
@@ -14,9 +18,14 @@ set cursorline "Highlight the current line
 set rnu "Relative line numbering 
 set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
 set shiftwidth=2 		"Set autoindent spaces to 2
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set encoding=utf-8
 set autoread				"Auto-load external changes to files
 set cindent					"Let's try this for now and see how it goes...
+set hidden	"Hide buffers instead of closing them
+set wildmenu "Command completion menu
+let g:session_autoload = 'no' "don't load sessions automatically...
+let g:session_autosave = 'yes' " ...but save them
 
 if has("mac") && has("gui") "Options for MacVim
 	"Don't stretch window horizontally in fullscreen mode
@@ -30,10 +39,6 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-"Useful stuff
-set nocompatible "No compatibility with old vi mode
-set modelines=0 "Avoid some kind of exploits... better let it be
-
 let mapleader = ',' "Leader key is easier at , than \
 let g:mapleader = ',' 
 
@@ -43,11 +48,11 @@ nnoremap <leader><Space> :noh<Cr>
 "Toggle relative line numbers easily (since they're unset automatically
 "sometimes)
 fu! ToggleRNU()
-				if &rnu
-								set number	"Set normal line numbers
-				else
-								set rnu			"Set relative line numbers
-				endif
+	if &rnu
+		set number	"Set normal line numbers
+	else
+		set rnu			"Set relative line numbers
+	endif
 endfunction
 
 nnoremap <leader>r :call ToggleRNU()<CR>
@@ -107,7 +112,7 @@ nnoremap <C-l> <C-w>l
 
 "Hide toolbar in GUI mode
 if has("gui_running")
-    set guioptions=egmrt
+	set guioptions=egmrt
 endif
 
 "'Normal' tab control bindings
@@ -126,20 +131,37 @@ inoremap <C-S-Tab> <C-o>gT
 autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
 
-"****************** Cope *************************************
-map <leader>cc :botright cope<cr>
+"Refer to the directory of the current file in command mode
+cabbr <expr> %% expand('%:p:h')
+
+"****************** Quickfix window *************************************
+function! QFixToggle()
+  if exists("g:qfix_win")
+    cclose
+    unlet g:qfix_win
+  else
+    botright copen
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+
+map <leader>. :call QFixToggle()<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 "****************** PLUGINS *****************
-"Show/Hide NERDTree
-command NT NERDTreeToggle
-
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
 
 "Change Yankring history file location
-let g:yankring_history_file = '.vim.yankring_history'
+if has("win32")
+	let g:yankring_history_file = 'vimfiles/.yankring_history'
+else
+	let g:yankring_history_file = '.vim/.yankring_history'
+endif
+
+"********************* NERDTree *******************
+command NT :NERDTreeToggle
 
 "************* VIMWIKI SETTINGS *************
 "Thesis wiki options
@@ -190,19 +212,25 @@ let g:tex_flavor='latex'
 
 "Set LaTeX viewer
 if has("unix") && match(system("uname"),'Darwin') != -1
-    " It's a Mac!
-    let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
+	" It's a Mac!
+	let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
 endif     
 "Backup file cleaning
 
-"if has("win32")
-"	silent execute '!mkdir ~\_backupdir'
-"	set backupdir=~\\_backupdir\\
-"	set directory=~\\_backupdir\\
-"else "mac, unix
-"	set backupdir=~/.vimbackups//
-"	set directory=~/.vimbackups//
-"endif
+if has("win32")
+	silent execute '!mkdir ~\_backupdir'
+	set backupdir=$HOME/vimfiles/backupfiles//
+	set directory=$HOME/vimfiles/swapfiles//
+	if exists("+undofile")
+		set undodir=$HOME/vimfiles/undofiles//
+	endif
+else "mac, unix
+	set backupdir=~/.vim/backupfiles//
+	set directory=~/.vim/swapfiles//
+	if exists("+undofile")
+		set undodir=~/.vim/undofiles//
+	endif
+endif
 
 "Load Timeline stuff
 if has("win32")
@@ -212,3 +240,8 @@ else
 endif
 "Timeline mappings
 nnoremap <leader>m :call TimelineEntry()<cr>
+
+"Abbreviations (using Abolish.vim)
+if exists('g:loaded_abolish')
+	Abolish functino function
+endif

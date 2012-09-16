@@ -33,7 +33,7 @@ ZSH_THEME="darchangel"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx vi-mode)
+plugins=(git osx)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,3 +60,4 @@ if growlnotify -h &>/dev/null; then
         zsh_growl_cmd=
     }
 fi
+alias phpsh='nocorrect phpsh '
