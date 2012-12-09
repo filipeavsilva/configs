@@ -33,11 +33,65 @@ if has("mac") && has("gui") "Options for MacVim
 	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
 endif
 
-"Load Pathogen bundle manager
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
-call pathogen#runtime_append_all_bundles()
+
+"------------------------------------- Vundle Bundles
+" Setting up Vundle
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+		echo "Installing Vundle.."
+		echo ""
+		silent !mkdir -p ~/.vim/bundle
+		silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+		let iCanHazVundle=0
+endif
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+"github+Vundle powah!!!
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-abolish'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'wincent/Command-T'
+Bundle 'skammer/vim-css-color'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'groenewege/vim-less'
+Bundle 'xolox/vim-session'
+Bundle 'tsaleh/vim-supertab'
+Bundle 'scrooloose/syntastic'
+Bundle 'davidoc/taskpaper.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'sjl/gundo.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'chrismetcalf/vim-rainbow'
+Bundle 'tpope/vim-repeat'
+Bundle 'garbas/vim-snipmate'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tpope/vim-surround'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'mattn/zencoding-vim'
+
+"github/vim-scripts bundles
+Bundle 'YankRing.vim'
+Bundle 'tlib'
+
+if iCanHazVundle == 0
+	echo "Installing Bundles, please ignore key map error messages"
+	echo ""
+	:BundleInstall
+endif
+
 filetype plugin indent on
+
+"------------------------------------
 
 let mapleader = ',' "Leader key is easier at , than \
 let g:mapleader = ',' 
@@ -131,6 +185,9 @@ inoremap <C-S-Tab> <C-o>gT
 autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
 
+"Limit syntax highlighting to a few lines, to avoid slowing on files with long lines
+set synmaxcol=120
+
 "Refer to the directory of the current file in command mode
 cabbr <expr> %% expand('%:p:h')
 
@@ -149,6 +206,10 @@ map <leader>. :call QFixToggle()<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
+"Save and load folds when leaving/entering
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview
+
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
@@ -162,6 +223,19 @@ endif
 
 "********************* NERDTree *******************
 command NT :NERDTreeToggle
+
+"Quit NERDTree if it's the last window
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 "************* VIMWIKI SETTINGS *************
 "Thesis wiki options
@@ -187,6 +261,9 @@ if has("mac")
 	let g:vimwiki_list = [thesiswiki]
 endif
 
+"******** vim-powerline **********
+let g:Powerline_symbols = 'fancy'
+set laststatus=2
 
 "Windows-specific stuff
 "set base directory in windows (mac already has this set correctly)
