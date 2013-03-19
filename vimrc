@@ -8,20 +8,21 @@ set ic "Ignore case in search
 set smartcase "Smart case in searches: lowercase: ignore, 1+ uppercase chars, case sensitive
 set is "Incremental search
 set showmatch "Show search match
-set ffs=mac,unix,dos "Allow all file formats
+set ffs=unix,mac,dos "Allow all file formats
 set undofile "Create undo file for each edited file
 set gdefault
 set so=7 "Scroll when cursor is 7 lines before the window edge
 set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
 set cursorline "Highlight the current line
+set cursorcolumn "Highlight the current column
 set rnu "Relative line numbering 
 set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
 set shiftwidth=2 		"Set autoindent spaces to 2
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set encoding=utf-8
 set autoread				"Auto-load external changes to files
-set cindent					"Let's try this for now and see how it goes...
+set cindent
 set hidden	"Hide buffers instead of closing them
 set wildmenu "Command completion menu
 let g:session_autoload = 'no' "don't load sessions automatically...
@@ -62,26 +63,28 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wincent/Command-T'
 Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
+Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'xolox/vim-session'
 Bundle 'tsaleh/vim-supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidoc/taskpaper.vim'
+"Deprecated version...
 Bundle 'Lokaltog/vim-powerline'
+"Upcoming, beta version. Uncomment when ready
+"Bundle 'Lokaltog/powerline'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chrismetcalf/vim-rainbow'
-Bundle 'tpope/vim-repeat'
+"Not wuite working correctly...
+"Bundle 'tpope/vim-repeat'
 Bundle 'garbas/vim-snipmate'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
-Bundle 'tlib'
 
 if iCanHazVundle == 0
 	echo "Installing Bundles, please ignore key map error messages"
@@ -99,8 +102,8 @@ let g:mapleader = ','
 "Remove search highlights easily
 nnoremap <leader><Space> :noh<Cr> 
 
-"Toggle relative line numbers easily (since they're unset automatically
-"sometimes)
+"Toggle relative line numbers easily (you may want to see the actual line
+"numbers, and the relative ones are unset automatically sometimes)
 fu! ToggleRNU()
 	if &rnu
 		set number	"Set normal line numbers
@@ -126,14 +129,6 @@ endfunction
 nnoremap <M-Return> :call ToggleFU()<CR>
 vnoremap <M-Return> :call ToggleFU()<CR>
 
-"Easy block matching
-nnoremap <tab> %
-vnoremap <tab> %
-
-"Set tabs to match blocks
-nnoremap <tab> % 
-vnoremap <tab> %
-
 "Set up and down keys to move by screen line and not file line
 nnoremap j gj
 nnoremap k gk
@@ -144,6 +139,7 @@ nnoremap <Up> gk
 nnoremap ; :
 command W :w
 command Q :q
+command X :x
 
 "Fix horrible, horrible regex literal char handling
 nnoremap / /\v
@@ -157,12 +153,11 @@ colorscheme solarized
 "Better way to work with splits
 "nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-"Show line numbers
-"set number
+"TODO: Get these two to work!
+let g:C_Ctrl_j = 'off'
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
 
 "Hide toolbar in GUI mode
 if has("gui_running")
@@ -186,10 +181,13 @@ autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
 
 "Limit syntax highlighting to a few lines, to avoid slowing on files with long lines
-set synmaxcol=120
+set synmaxcol=200
 
 "Refer to the directory of the current file in command mode
 cabbr <expr> %% expand('%:p:h')
+
+"Change to a buffer's directory on entering
+autocmd BufEnter * silent! lcd %:p:h
 
 "****************** Quickfix window *************************************
 function! QFixToggle()
@@ -237,41 +235,16 @@ endfunction
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-"************* VIMWIKI SETTINGS *************
-"Thesis wiki options
-"(for mac only)
-if has("mac")
-	let thesiswiki = {}
-	let thesiswiki.maxhi = 1
-	let thesiswiki.css_name = 'style.css'
-	let thesiswiki.auto_export = 1
-	let thesiswiki.diary_index = 'diary'
-	let thesiswiki.nested_syntaxes = {'bibtex': 'bib'}
-	let thesiswiki.path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/'
-	let thesiswiki.diary_link_fmt = '%Y-%m-%d'
-	let thesiswiki.template_path = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/templates'
-	let thesiswiki.template_default = 'navigation_links.html'
-	let thesiswiki.template_ext = '.html'
-	let thesiswiki.diary_link_count = 4
-	let thesiswiki.syntax = 'default'
-	let thesiswiki.index = 'index'
-	let thesiswiki.diary_header = 'Diary'
-	let thesiswiki.ext = '.wiki'
-	let thesiswiki.path_html = '/Users/filipesilva/IST/LEIC/5º Ano (2º MEIC)/Tese/Wiki/html'
-	let g:vimwiki_list = [thesiswiki]
-endif
-
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
-set laststatus=2
+set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
 "set base directory in windows (mac already has this set correctly)
 if has("win32")
-	cd ~
+	"cd ~
 	set bs=2
 	set gfn=Courier_New:h9:cANSI
-	"au GUIEnter * simalt ~x "maximize window
 	set lines=41
 	set columns=124		
 	winpos 6 29
@@ -286,6 +259,7 @@ set grepprg=grep\ -nH\ $*
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+let g:Tex_GotoError=0 "Don't go to errors
 
 "Set LaTeX viewer
 if has("unix") && match(system("uname"),'Darwin') != -1
@@ -295,10 +269,12 @@ endif
 "Backup file cleaning
 
 if has("win32")
-	silent execute '!mkdir ~\_backupdir'
+	silent execute '!mkdir '.$HOME.'\vimfiles\backupfiles'
+	silent execute '!mkdir '.$HOME.'\vimfiles\swapfiles'
 	set backupdir=$HOME/vimfiles/backupfiles//
 	set directory=$HOME/vimfiles/swapfiles//
 	if exists("+undofile")
+	silent execute '!mkdir '.$HOME.'\vimfiles\undofiles'
 		set undodir=$HOME/vimfiles/undofiles//
 	endif
 else "mac, unix
@@ -310,13 +286,13 @@ else "mac, unix
 endif
 
 "Load Timeline stuff
-if has("win32")
-	so $HOME/vimfiles/bundle/timeline/timeline.vim
-else
-	so $HOME/.vim/bundle/timeline/timeline.vim
-endif
-"Timeline mappings
-nnoremap <leader>m :call TimelineEntry()<cr>
+"if has("win32")
+	"so $HOME/vimfiles/bundle/timeline/timeline.vim
+"else
+	"so $HOME/.vim/bundle/timeline/timeline.vim
+"endif
+""Timeline mappings
+"nnoremap <leader>m :call TimelineEntry()<cr>
 
 "Abbreviations (using Abolish.vim)
 if exists('g:loaded_abolish')
