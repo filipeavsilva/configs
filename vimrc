@@ -34,6 +34,7 @@ if has("mac") && has("gui") "Options for MacVim
 	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
 endif
 
+syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
 
@@ -60,7 +61,6 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-abolish'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'wincent/Command-T'
 Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
@@ -76,15 +76,19 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chrismetcalf/vim-rainbow'
-"Not wuite working correctly...
+"Not quite working correctly...
 "Bundle 'tpope/vim-repeat'
+Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
+Bundle 'kchmck/vim-coffee-script'
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
+Bundle 'Jinja'
+Bundle 'tlib'
 
 if iCanHazVundle == 0
 	echo "Installing Bundles, please ignore key map error messages"
@@ -93,6 +97,9 @@ if iCanHazVundle == 0
 endif
 
 filetype plugin indent on
+
+"Fix some file detection nonsense
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
 "------------------------------------
 
@@ -139,7 +146,6 @@ nnoremap <Up> gk
 nnoremap ; :
 command W :w
 command Q :q
-command X :x
 
 "Fix horrible, horrible regex literal char handling
 nnoremap / /\v
