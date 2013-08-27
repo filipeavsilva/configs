@@ -10,7 +10,7 @@ set is "Incremental search
 set showmatch "Show search match
 set ffs=unix,mac,dos "Allow all file formats
 set undofile "Create undo file for each edited file
-set gdefault
+set gdefault "Substitutions default to global
 set so=7 "Scroll when cursor is 7 lines before the window edge
 set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
@@ -22,7 +22,7 @@ set shiftwidth=2 		"Set autoindent spaces to 2
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set encoding=utf-8
 set autoread				"Auto-load external changes to files
-set cindent
+set cindent "C-style indents
 set hidden	"Hide buffers instead of closing them
 set wildmenu "Command completion menu
 let g:session_autoload = 'no' "don't load sessions automatically...
