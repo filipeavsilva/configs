@@ -140,7 +140,6 @@ nnoremap <Up> gk
 inoremap jk <Esc>
 
 "Compensate for errors when running commands
-nnoremap ; :
 command! W :w
 command! Q :q
 
@@ -227,7 +226,7 @@ else
 endif
 
 "********************* NERDTree *******************
-command NT :NERDTreeToggle
+command! NT :NERDTreeToggle
 
 "Quit NERDTree if it's the last window
 function! s:CloseIfOnlyNerdTreeLeft()
