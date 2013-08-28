@@ -87,6 +87,9 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'spf13/vim-autoclose'
+Bundle 'godlygeek/csapprox'
+Bundle 'jistr/vim-nerdtree-tabs'
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
@@ -231,7 +234,7 @@ else
 endif
 
 "********************* NERDTree *******************
-command! NT :NERDTreeToggle
+command! NT :NERDTreeTabsToggle
 
 "Quit NERDTree if it's the last window
 function! s:CloseIfOnlyNerdTreeLeft()
