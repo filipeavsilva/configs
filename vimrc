@@ -16,7 +16,6 @@ set ruler "always show the ruler
 set showcmd "Show incomplete commands next to the ruler
 set cursorline "Highlight the current line
 set cursorcolumn "Highlight the current column
-set rnu "Relative line numbering 
 set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
 set shiftwidth=2 		"Set autoindent spaces to 2
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
@@ -64,8 +63,10 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
+"Dependency for vim-session
+Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
-Bundle 'tsaleh/vim-supertab'
+
 Bundle 'scrooloose/syntastic'
 Bundle 'davidoc/taskpaper.vim'
 "Deprecated version...
@@ -84,10 +85,11 @@ Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'nelstrom/vim-markdown-preview'
+Bundle 'myusuf3/numbers.vim'
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
-Bundle 'Jinja'
 Bundle 'tlib'
 
 if iCanHazVundle == 0
@@ -97,6 +99,7 @@ if iCanHazVundle == 0
 endif
 
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
@@ -109,18 +112,9 @@ let g:mapleader = ','
 "Remove search highlights easily
 nnoremap <leader><Space> :noh<Cr> 
 
-"Toggle relative line numbers easily (you may want to see the actual line
-"numbers, and the relative ones are unset automatically sometimes)
-fu! ToggleRNU()
-	if &rnu
-		set number	"Set normal line numbers
-	else
-		set rnu			"Set relative line numbers
-	endif
-endfunction
-
-nnoremap <leader>r :call ToggleRNU()<CR>
-vnoremap <leader>r :call ToggleRNU()<CR>
+nnoremap <leader>r :NumbersToggle<CR>
+"Toggle the numbers and retain the selection
+vnoremap <leader>r :<C-U>NumbersToggle<CR>gv
 
 "Toggle fullscreen
 fu! ToggleFU()
@@ -142,14 +136,21 @@ nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up> gk
 
+"Avoid pressing <Esc>
+inoremap jk <Esc>
+
 "Compensate for errors when running commands
 nnoremap ; :
-command W :w
-command Q :q
+command! W :w
+command! Q :q
 
 "Fix horrible, horrible regex literal char handling
 nnoremap / /\v
 vnoremap / /\v
+
+"Keep text selected after indenting
+vnoremap < <gv
+vnoremap > >gv
 
 "Colors
 syntax enable
@@ -246,9 +247,7 @@ let g:Powerline_symbols = 'fancy'
 set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
-"set base directory in windows (mac already has this set correctly)
 if has("win32")
-	"cd ~
 	set bs=2
 	set gfn=Courier_New:h9:cANSI
 	set lines=41
@@ -290,15 +289,6 @@ else "mac, unix
 		set undodir=~/.vim/undofiles//
 	endif
 endif
-
-"Load Timeline stuff
-"if has("win32")
-	"so $HOME/vimfiles/bundle/timeline/timeline.vim
-"else
-	"so $HOME/.vim/bundle/timeline/timeline.vim
-"endif
-""Timeline mappings
-"nnoremap <leader>m :call TimelineEntry()<cr>
 
 "Abbreviations (using Abolish.vim)
 if exists('g:loaded_abolish')
