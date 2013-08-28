@@ -153,7 +153,12 @@ vnoremap > >gv
 
 "Colors
 syntax enable
-set background=dark
+if has("win32")
+	set background=light
+else
+	set background=dark
+endif
+
 colorscheme solarized
 
 "Better way to work with splits
