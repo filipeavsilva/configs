@@ -90,6 +90,7 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'spf13/vim-autoclose'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'nono/vim-handlebars'
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
@@ -236,18 +237,6 @@ endif
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
 
-"Quit NERDTree if it's the last window
-"function! s:CloseIfOnlyNerdTreeLeft()
-  "if exists("t:NERDTreeBufName")
-    "if bufwinnr(t:NERDTreeBufName) != -1
-      "if winnr("$") == 1
-        "q
-      "endif
-    "endif
-  "endif
-"endfunction
-
-"autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
 
 "******** vim-powerline **********
