@@ -237,17 +237,18 @@ endif
 command! NT :NERDTreeTabsToggle
 
 "Quit NERDTree if it's the last window
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
+"function! s:CloseIfOnlyNerdTreeLeft()
+  "if exists("t:NERDTreeBufName")
+    "if bufwinnr(t:NERDTreeBufName) != -1
+      "if winnr("$") == 1
+        "q
+      "endif
+    "endif
+  "endif
+"endfunction
 
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+"autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
 
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
