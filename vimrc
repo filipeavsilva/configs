@@ -78,7 +78,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chrismetcalf/vim-rainbow'
 "Not quite working correctly...
-"Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
@@ -87,13 +87,13 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
-Bundle 'spf13/vim-autoclose'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'nono/vim-handlebars'
+Bundle 'kien/ctrlp.vim'
 
 "github/vim-scripts bundles
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
 Bundle 'tlib'
 
 if iCanHazVundle == 0
