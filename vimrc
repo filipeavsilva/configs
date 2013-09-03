@@ -78,7 +78,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chrismetcalf/vim-rainbow'
 "Not quite working correctly...
-"Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
@@ -90,12 +90,12 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'nono/vim-handlebars'
-Bundle 'wincent/Command-T'
 "Color scheme for 16-color terminal
-Bundle "noahfrederick/vim-noctu"
+Bundle 'noahfrederick/vim-noctu'
+Bundle 'kien/ctrlp.vim'
 
 "github/vim-scripts bundles
-"Bundle 'YankRing.vim' "It's bugged... Replace doesn't work
+"Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
 
 if iCanHazVundle == 0
