@@ -87,13 +87,15 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
-Bundle 'spf13/vim-autoclose'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'nono/vim-handlebars'
+Bundle 'wincent/Command-T'
+"Color scheme for 16-color terminal
+Bundle "noahfrederick/vim-noctu"
 
 "github/vim-scripts bundles
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim' "It's bugged... Replace doesn't work
 Bundle 'tlib'
 
 if iCanHazVundle == 0
@@ -107,6 +109,7 @@ set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *.hbs, *.handlebars set filetype=handlebars
 
 "------------------------------------
 
@@ -163,7 +166,11 @@ else
 	set background=dark
 endif
 
-colorscheme solarized
+if has("gui")
+	colorscheme solarized
+else
+	colorscheme noctu
+endif
 
 "Better way to work with splits
 "nnoremap <leader>w <C-w>v<C-w>l
@@ -179,6 +186,8 @@ if has("gui_running")
 	set guioptions=egmrt
 endif
 
+"** TABS **
+
 "'Normal' tab control bindings
 "Normal, visual, select and operator-pending modes
 nnoremap <C-Tab> gt
@@ -191,7 +200,11 @@ onoremap <C-S-Tab> gT
 inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
+"Good tab labels
+set guitablabel=%N\ %t\ %M 
 "Set spelling automatically for certain file types
+
+
 autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
 
@@ -228,11 +241,11 @@ au BufWinEnter * silent! loadview
 nnoremap <F5> :GundoToggle<CR>
 
 "Change Yankring history file location
-if has("win32")
-	let g:yankring_history_file = 'vimfiles/.yankring_history'
-else
-	let g:yankring_history_file = '.vim/.yankring_history'
-endif
+"if has("win32")
+	"let g:yankring_history_file = 'vimfiles/.yankring_history'
+"else
+	"let g:yankring_history_file = '.vim/.yankring_history'
+"endif
 
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
@@ -249,7 +262,7 @@ if has("win32")
 	set gfn=Courier_New:h9:cANSI
 	set lines=41
 	set columns=124		
-	winpos 6 29
+	"winpos 6 29
 endif
 
 "LaTeX stuff
