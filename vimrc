@@ -24,33 +24,44 @@ set autoread				"Auto-load external changes to files
 set cindent "C-style indents
 set hidden	"Hide buffers instead of closing them
 set wildmenu "Command completion menu
+set nu "Turn line numbers on
 let g:session_autoload = 'no' "don't load sessions automatically...
 let g:session_autosave = 'yes' " ...but save them
 
-if has("mac") && has("gui") "Options for MacVim
-	"Don't stretch window horizontally in fullscreen mode
-	"Set the backgroud color in fullscreen
-	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
-endif
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
 
 "------------------------------------- Vundle Bundles
-" Setting up Vundle
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-		echo "Installing Vundle.."
-		echo ""
-		silent !mkdir -p ~/.vim/bundle
-		silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-		let iCanHazVundle=0
+" Setting up Vundle (NOT WORKING!...)
+"let iCanHazVundle=1
+"if has("win32") || has("win64")
+	"let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
+"else
+	"let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
+"endif
+"if !filereadable(vundle_readme)
+		"echo "Installing Vundle.."
+		"echo ""
+	"if has("win32") || has("win64")
+		"silent !mkdir -p $HOME/vimfiles/bundle
+		"silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
+	"else
+		"silent !mkdir -p ~/.vim/bundle
+		"silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	"endif
+		"let iCanHazVundle=0
+"endif
+
+if has("win32") || has("win64")
+	set rtp+=~/vimfiles/bundle/vundle/
+	call vundle#rc()
+else
+	set rtp+=~/.vim/bundle/vundle/
+	call vundle#rc()
 endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
@@ -97,12 +108,13 @@ Bundle 'kien/ctrlp.vim'
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
+Bundle 'Decho'
 
-if iCanHazVundle == 0
-	echo "Installing Bundles, please ignore key map error messages"
-	echo ""
-	:BundleInstall
-endif
+"if iCanHazVundle == 0
+	"echo "Installing Bundles, please ignore key map error messages"
+	"echo ""
+	":BundleInstall
+"endif
 
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
@@ -160,17 +172,7 @@ vnoremap > >gv
 
 "Colors
 syntax enable
-if has("win32")
-	set background=light
-else
-	set background=dark
-endif
-
-if has("gui")
-	colorscheme solarized
-else
-	colorscheme noctu
-endif
+set background=dark
 
 "Better way to work with splits
 "nnoremap <leader>w <C-w>v<C-w>l
@@ -180,11 +182,6 @@ nnoremap <C-l> <C-w>l
 let g:C_Ctrl_j = 'off'
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
-
-"Hide toolbar in GUI mode
-if has("gui_running")
-	set guioptions=egmrt
-endif
 
 "** TABS **
 
@@ -204,6 +201,28 @@ inoremap <C-S-Tab> <C-o>gT
 set guitablabel=%N\ %t\ %M 
 "Set spelling automatically for certain file types
 
+if has("gui")
+	colorscheme solarized
+	
+	"Hide toolbar in GUI mode
+	set guioptions=egmrt
+
+	if has("win32") || has("win64")
+		set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
+	else
+		"Change this when I get home...
+		set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
+	endif
+
+	if has("mac") "Options for MacVim
+		"Don't stretch window horizontally in fullscreen mode
+		"Set the backgroud color in fullscreen
+		set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
+	endif
+else
+	colorscheme noctu
+endif
+
 
 autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
@@ -213,6 +232,10 @@ set synmaxcol=200
 
 "Refer to the directory of the current file in command mode
 cabbr <expr> %% expand('%:p:h')
+
+if has("win32") || has("win64") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
+	lcd $HOME
+endif
 
 "Change to a buffer's directory on entering
 autocmd BufEnter * silent! lcd %:p:h
@@ -259,7 +282,7 @@ set laststatus=2 "Avoid statusline appearing only in splits
 "Windows-specific stuff
 if has("win32")
 	set bs=2
-	set gfn=Courier_New:h9:cANSI
+	"set gfn=Courier_New:h9:cANSI
 	set lines=41
 	set columns=124		
 	"winpos 6 29
@@ -283,7 +306,7 @@ if has("unix") && match(system("uname"),'Darwin') != -1
 endif     
 "Backup file cleaning
 
-if has("win32")
+if has("win32") || has("win64")
 	silent execute '!mkdir '.$HOME.'\vimfiles\backupfiles'
 	silent execute '!mkdir '.$HOME.'\vimfiles\swapfiles'
 	set backupdir=$HOME/vimfiles/backupfiles//
