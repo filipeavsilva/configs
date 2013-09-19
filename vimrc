@@ -171,7 +171,6 @@ vnoremap < <gv
 vnoremap > >gv
 
 "Colors
-syntax enable
 set background=dark
 
 "Better way to work with splits
