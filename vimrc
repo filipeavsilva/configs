@@ -25,6 +25,7 @@ set cindent "C-style indents
 set hidden	"Hide buffers instead of closing them
 set wildmenu "Command completion menu
 set nu "Turn line numbers on
+set t_Co=256 "Pretty colors in terminal
 let g:session_autoload = 'no' "don't load sessions automatically...
 let g:session_autosave = 'yes' " ...but save them
 
@@ -39,25 +40,25 @@ filetype on "Ensure filetype is on before turning off. Used to avoid returning a
 filetype off
 
 "------------------------------------- Vundle Bundles
-" Setting up Vundle (NOT WORKING!...)
-"let iCanHazVundle=1
-"if has("win32") || has("win64")
-	"let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
-"else
-	"let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
-"endif
-"if !filereadable(vundle_readme)
-		"echo "Installing Vundle.."
-		"echo ""
-	"if has("win32") || has("win64")
-		"silent !mkdir -p $HOME/vimfiles/bundle
-		"silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
-	"else
-		"silent !mkdir -p ~/.vim/bundle
-		"silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	"endif
-		"let iCanHazVundle=0
-"endif
+ "Setting up Vundle (NOT WORKING in windows!
+let iCanHazVundle=1
+if has("win32") || has("win64")
+	let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
+else
+	let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
+endif
+if !filereadable(vundle_readme)
+		echo "Installing Vundle.."
+		echo ""
+	if has("win32") || has("win64")
+		silent !mkdir -p $HOME/vimfiles/bundle
+		silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
+	else
+		silent !mkdir -p ~/.vim/bundle
+		silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	endif
+		let iCanHazVundle=0
+endif
 
 if has("win32") || has("win64")
 	set rtp+=~/vimfiles/bundle/vundle/
@@ -114,11 +115,11 @@ Bundle 'kien/ctrlp.vim'
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
 
-"if iCanHazVundle == 0
-	"echo "Installing Bundles, please ignore key map error messages"
-	"echo ""
-	":BundleInstall
-"endif
+if iCanHazVundle == 0
+	echo "Installing Bundles, please ignore key map error messages"
+	echo ""
+	:BundleInstall
+endif
 
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
@@ -216,7 +217,9 @@ if has("gui")
 		set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
 	endif
 else
-	colorscheme noctu
+	if has("win32") || has("win64") "Mac colors are OK
+		colorscheme noctu
+	endif
 endif
 
 
