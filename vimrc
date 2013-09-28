@@ -28,6 +28,11 @@ set nu "Turn line numbers on
 let g:session_autoload = 'no' "don't load sessions automatically...
 let g:session_autosave = 'yes' " ...but save them
 
+if has("mac") && has("gui") "Options for MacVim
+	"Don't stretch window horizontally in fullscreen mode
+	"Set the backgroud color in fullscreen
+	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
+endif
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
@@ -108,7 +113,6 @@ Bundle 'kien/ctrlp.vim'
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
-Bundle 'Decho'
 
 "if iCanHazVundle == 0
 	"echo "Installing Bundles, please ignore key map error messages"
@@ -121,7 +125,6 @@ set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
-autocmd BufNewFile,BufRead *.hbs, *.handlebars set filetype=handlebars
 
 "------------------------------------
 
@@ -205,13 +208,7 @@ if has("gui")
 	
 	"Hide toolbar in GUI mode
 	set guioptions=egmrt
-
-	if has("win32") || has("win64")
-		set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
-	else
-		"Change this when I get home...
-		set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
-	endif
+	set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
 	if has("mac") "Options for MacVim
 		"Don't stretch window horizontally in fullscreen mode
@@ -281,10 +278,8 @@ set laststatus=2 "Avoid statusline appearing only in splits
 "Windows-specific stuff
 if has("win32")
 	set bs=2
-	"set gfn=Courier_New:h9:cANSI
 	set lines=41
 	set columns=124		
-	"winpos 6 29
 endif
 
 "LaTeX stuff
