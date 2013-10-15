@@ -1,0 +1,33 @@
+#Create a table
+snippet ct
+	create table ${1:table name}(
+		${2:Id} int unsigned primary key auto_increment,
+	);
+
+
+#Foreign key sentence
+snippet fk
+	foreign key (${1:field}) references ${2:table}(${3:Id})
+
+#Basic select statement
+snippet select
+	select
+		${1:*}
+	from
+		${2:table}
+	where
+		${3:conditions}
+	;
+
+#Select table duplicates
+snippet dup
+	select
+		${1:Id},
+		COUNT($1)
+	from
+		${2:table}
+	group by
+		$1
+	having
+		COUNT($1) > 1
+	;
