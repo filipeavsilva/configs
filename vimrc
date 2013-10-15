@@ -80,6 +80,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'groenewege/vim-less'
 "Dependency for vim-session
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
@@ -114,6 +115,7 @@ Bundle 'kien/ctrlp.vim'
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
+Bundle 'JavaScript-Indent'
 
 "Other git repos
 Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
