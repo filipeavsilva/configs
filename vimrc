@@ -115,6 +115,9 @@ Bundle 'kien/ctrlp.vim'
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
 
+"Other git repos
+Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+
 if iCanHazVundle == 0
 	echo "Installing Bundles, please ignore key map error messages"
 	echo ""
