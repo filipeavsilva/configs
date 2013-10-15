@@ -1,38 +1,39 @@
 "Useful stuff
-set nocompatible "No compatibility with old vi mode
-set modelines=0 "Avoid some kind of exploits... better let it be
+set nocompatible                "No compatibility with old vi mode
+set modelines=0                 "Avoid some kind of exploits... better let it be
 
 "Misc options
-set hls "Highlight search
-set ic "Ignore case in search
-set smartcase "Smart case in searches: lowercase: ignore, 1+ uppercase chars, case sensitive
-set is "Incremental search
-set showmatch "Show search match
-set ffs=unix,mac,dos "Allow all file formats
-set undofile "Create undo file for each edited file
-set gdefault "Substitutions default to global
-set so=7 "Scroll when cursor is 7 lines before the window edge
-set ruler "always show the ruler
-set showcmd "Show incomplete commands next to the ruler
-set cursorline "Highlight the current line
-set cursorcolumn "Highlight the current column
-set ts=2						"Set tabstop to 2 (tabs have a length of 2 spaces)
-set shiftwidth=2 		"Set autoindent spaces to 2
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set hls                         "Highlight search
+set ic                          "Ignore case in search
+set smartcase                   "Smart case in searches: lowercase: ignore, 1+ uppercase chars, case sensitive
+set is                          "Incremental search
+set showmatch                   "Show search match
+set ffs=unix,mac,dos            "Allow all file formats
+set undofile                    "Create undo file for each edited file
+set gdefault                    "Substitutions default to global
+set so=7                        "Scroll when cursor is 7 lines before the window edge
+set ruler                       "always show the ruler
+set showcmd                     "Show incomplete commands next to the ruler
+set cursorline                  "Highlight the current line
+set cursorcolumn                "Highlight the current column
+set ts=4                                    "Set tabstop to 4 (tabs have a length of 4 spaces)
+set shiftwidth=4                    "Set autoindent spaces to 2
+set shiftround                  "use multiple of shiftwidth when indenting with '<' and '>'
+set expandtab                   "Expand tabs to spaces
 set encoding=utf-8
-set autoread				"Auto-load external changes to files
-set cindent "C-style indents
-set hidden	"Hide buffers instead of closing them
-set wildmenu "Command completion menu
-set nu "Turn line numbers on
-set t_Co=256 "Pretty colors in terminal
-let g:session_autoload = 'no' "don't load sessions automatically...
-let g:session_autosave = 'yes' " ...but save them
+set autoread                            "Auto-load external changes to files
+set cindent                     "C-style indents
+set hidden                      "Hide buffers instead of closing them
+set wildmenu                    "Command completion menu
+set nu                          "Turn line numbers on
+set t_Co=256                    "Pretty colors in terminal
+let g:session_autoload = 'no'   "don't load sessions automatically...
+let g:session_autosave = 'yes'  " ...but save them
 
 if has("mac") && has("gui") "Options for MacVim
-	"Don't stretch window horizontally in fullscreen mode
-	"Set the backgroud color in fullscreen
-	set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
+    "Don't stretch window horizontally in fullscreen mode
+    "Set the backgroud color in fullscreen
+    set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
 endif
 
 syntax on
@@ -40,32 +41,32 @@ filetype on "Ensure filetype is on before turning off. Used to avoid returning a
 filetype off
 
 "------------------------------------- Vundle Bundles
- "Setting up Vundle (NOT WORKING in windows!
+"Setting up Vundle (NOT WORKING in windows!
 let iCanHazVundle=1
 if has("win32") || has("win64")
-	let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
+    let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
 else
-	let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
+    let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
 endif
 if !filereadable(vundle_readme)
-		echo "Installing Vundle.."
-		echo ""
-	if has("win32") || has("win64")
-		silent !mkdir -p $HOME/vimfiles/bundle
-		silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
-	else
-		silent !mkdir -p ~/.vim/bundle
-		silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	endif
-		let iCanHazVundle=0
+    echo "Installing Vundle.."
+    echo ""
+    if has("win32") || has("win64")
+        silent !mkdir -p $HOME/vimfiles/bundle
+        silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
+    else
+        silent !mkdir -p ~/.vim/bundle
+        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    endif
+    let iCanHazVundle=0
 endif
 
 if has("win32") || has("win64")
-	set rtp+=~/vimfiles/bundle/vundle/
-	call vundle#rc()
+    set rtp+=~/vimfiles/bundle/vundle/
+    call vundle#rc()
 else
-	set rtp+=~/.vim/bundle/vundle/
-	call vundle#rc()
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 endif
 
 
@@ -111,19 +112,21 @@ Bundle 'nono/vim-handlebars'
 "Color scheme for 16-color terminal
 Bundle 'noahfrederick/vim-noctu'
 Bundle 'kien/ctrlp.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'marijnh/tern_for_vim'
 
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
-Bundle 'JavaScript-Indent'
+Bundle 'Tagbar'
 
 "Other git repos
 Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 if iCanHazVundle == 0
-	echo "Installing Bundles, please ignore key map error messages"
-	echo ""
-	:BundleInstall
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
 endif
 
 filetype plugin indent on
@@ -146,13 +149,13 @@ vnoremap <leader>r :<C-U>NumbersToggle<CR>gv
 
 "Toggle fullscreen
 fu! ToggleFU()
-	if &fullscreen
-		set nofu
-		set guioptions+=r "add scrollbar
-	else
-		set fu
-		set guioptions-=r "remove scrollbar
-	endif
+    if &fullscreen
+        set nofu
+        set guioptions+=r "add scrollbar
+    else
+        set fu
+        set guioptions-=r "remove scrollbar
+    endif
 endfunction
 
 nnoremap <M-Return> :call ToggleFU()<CR>
@@ -210,21 +213,21 @@ set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
 
 if has("gui")
-	colorscheme solarized
-	
-	"Hide toolbar in GUI mode
-	set guioptions=egmrt
-	set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
+    colorscheme solarized
 
-	if has("mac") "Options for MacVim
-		"Don't stretch window horizontally in fullscreen mode
-		"Set the backgroud color in fullscreen
-		set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
-	endif
+    "Hide toolbar in GUI mode
+    set guioptions=egmrt
+    set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
+
+    if has("mac") "Options for MacVim
+        "Don't stretch window horizontally in fullscreen mode
+        "Set the backgroud color in fullscreen
+        set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
+    endif
 else
-	if has("win32") || has("win64") "Mac colors are OK
-		colorscheme noctu
-	endif
+    if has("win32") || has("win64") "Mac colors are OK
+        colorscheme noctu
+    endif
 endif
 
 
@@ -238,7 +241,7 @@ set synmaxcol=200
 cabbr <expr> %% expand('%:p:h')
 
 if has("win32") || has("win64") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
-	lcd $HOME
+    lcd $HOME
 endif
 
 "Change to a buffer's directory on entering
@@ -246,13 +249,13 @@ autocmd BufEnter * silent! lcd %:p:h
 
 "****************** Quickfix window *************************************
 function! QFixToggle()
-  if exists("g:qfix_win")
-    cclose
-    unlet g:qfix_win
-  else
-    botright copen
-    let g:qfix_win = bufnr("$")
-  endif
+    if exists("g:qfix_win")
+        cclose
+        unlet g:qfix_win
+    else
+        botright copen
+        let g:qfix_win = bufnr("$")
+    endif
 endfunction
 
 map <leader>. :call QFixToggle()<cr>
@@ -269,9 +272,9 @@ nnoremap <F5> :GundoToggle<CR>
 
 "Change Yankring history file location
 "if has("win32")
-	"let g:yankring_history_file = 'vimfiles/.yankring_history'
+"let g:yankring_history_file = 'vimfiles/.yankring_history'
 "else
-	"let g:yankring_history_file = '.vim/.yankring_history'
+"let g:yankring_history_file = '.vim/.yankring_history'
 "endif
 
 "********************* NERDTree *******************
@@ -285,9 +288,9 @@ set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
 if has("win32")
-	set bs=2
-	set lines=41
-	set columns=124		
+    set bs=2
+    set lines=41
+    set columns=124     
 endif
 
 "LaTeX stuff
@@ -303,29 +306,29 @@ let g:Tex_GotoError=0 "Don't go to errors
 
 "Set LaTeX viewer
 if has("unix") && match(system("uname"),'Darwin') != -1
-	" It's a Mac!
-	let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
+    " It's a Mac!
+    let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
 endif     
 "Backup file cleaning
 
 if has("win32") || has("win64")
-	silent execute '!mkdir '.$HOME.'\vimfiles\backupfiles'
-	silent execute '!mkdir '.$HOME.'\vimfiles\swapfiles'
-	set backupdir=$HOME/vimfiles/backupfiles//
-	set directory=$HOME/vimfiles/swapfiles//
-	if exists("+undofile")
-	silent execute '!mkdir '.$HOME.'\vimfiles\undofiles'
-		set undodir=$HOME/vimfiles/undofiles//
-	endif
+    silent execute '!mkdir '.$HOME.'\vimfiles\backupfiles'
+    silent execute '!mkdir '.$HOME.'\vimfiles\swapfiles'
+    set backupdir=$HOME/vimfiles/backupfiles//
+    set directory=$HOME/vimfiles/swapfiles//
+    if exists("+undofile")
+        silent execute '!mkdir '.$HOME.'\vimfiles\undofiles'
+        set undodir=$HOME/vimfiles/undofiles//
+    endif
 else "mac, unix
-	set backupdir=~/.vim/backupfiles//
-	set directory=~/.vim/swapfiles//
-	if exists("+undofile")
-		set undodir=~/.vim/undofiles//
-	endif
+    set backupdir=~/.vim/backupfiles//
+    set directory=~/.vim/swapfiles//
+    if exists("+undofile")
+        set undodir=~/.vim/undofiles//
+    endif
 endif
 
 "Abbreviations (using Abolish.vim)
 if exists('g:loaded_abolish')
-	Abolish functino function
+    Abolish functino function
 endif
