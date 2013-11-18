@@ -16,12 +16,12 @@ set ruler                       "always show the ruler
 set showcmd                     "Show incomplete commands next to the ruler
 set cursorline                  "Highlight the current line
 set cursorcolumn                "Highlight the current column
-set ts=4                                    "Set tabstop to 4 (tabs have a length of 4 spaces)
-set shiftwidth=4                    "Set autoindent spaces to 2
+set ts=4                        "Set tabstop to 4 (tabs have a length of 4 spaces)
+set shiftwidth=4                "Set autoindent spaces to 2
 set shiftround                  "use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab                   "Expand tabs to spaces
 set encoding=utf-8
-set autoread                            "Auto-load external changes to files
+set autoread                    "Auto-load external changes to files
 set cindent                     "C-style indents
 set hidden                      "Hide buffers instead of closing them
 set wildmenu                    "Command completion menu
@@ -114,6 +114,7 @@ Bundle 'noahfrederick/vim-noctu'
 Bundle 'kien/ctrlp.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'marijnh/tern_for_vim'
+Bundle 'mrtazz/simplenote.vim'
 
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
@@ -181,6 +182,13 @@ vnoremap / /\v
 "Keep text selected after indenting
 vnoremap < <gv
 vnoremap > >gv
+
+"Keep : (commands) and ; (next result for f or t) in the same keys in portuguese
+nnoremap Ç :
+vnoremap Ç :
+nnoremap ç ;
+vnoremap ç ;
+
 
 "Colors
 set background=dark
@@ -276,6 +284,9 @@ nnoremap <F5> :GundoToggle<CR>
 "else
 "let g:yankring_history_file = '.vim/.yankring_history'
 "endif
+
+"********************* Simplenote *******************
+so ~/.simplenote
 
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
