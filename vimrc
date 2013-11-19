@@ -286,7 +286,9 @@ nnoremap <F5> :GundoToggle<CR>
 "endif
 
 "********************* Simplenote *******************
-so ~/.simplenote
+if filereadable("~/.simplenote")
+    so ~/.simplenote
+endif
 
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
