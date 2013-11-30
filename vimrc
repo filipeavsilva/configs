@@ -292,6 +292,7 @@ so ~/.simplenote
 command! NT :NERDTreeTabsToggle
 
 let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
+let NERDTreeIgnore = ['\.pyc$']
 
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
