@@ -30,12 +30,6 @@ set t_Co=256                    "Pretty colors in terminal
 let g:session_autoload = 'no'   "don't load sessions automatically...
 let g:session_autosave = 'yes'  " ...but save them
 
-if has("mac") && has("gui") "Options for MacVim
-    "Don't stretch window horizontally in fullscreen mode
-    "Set the backgroud color in fullscreen
-    set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
-endif
-
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
@@ -294,7 +288,7 @@ endif
 command! NT :NERDTreeTabsToggle
 
 let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
 
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
