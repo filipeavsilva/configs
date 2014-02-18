@@ -11,7 +11,8 @@ set showmatch                   "Show search match
 set ffs=unix,mac,dos            "Allow all file formats
 set undofile                    "Create undo file for each edited file
 set gdefault                    "Substitutions default to global
-set so=7                        "Scroll when cursor is 7 lines before the window edge
+set scrolloff=5                 "Scroll when cursor is 5 lines before the window edge
+set sidescrolloff=3             "Scroll when cursor is 3 columns before the window edge
 set ruler                       "always show the ruler
 set showcmd                     "Show incomplete commands next to the ruler
 set cursorline                  "Highlight the current line
@@ -20,19 +21,29 @@ set ts=4                        "Set tabstop to 4 (tabs have a length of 4 space
 set shiftwidth=4                "Set autoindent spaces to 2
 set shiftround                  "use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab                   "Expand tabs to spaces
-set encoding=utf-8
+set encoding=utf-8              "Well, duh...
 set autoread                    "Auto-load external changes to files
 set cindent                     "C-style indents
 set hidden                      "Hide buffers instead of closing them
 set wildmenu                    "Command completion menu
 set nu                          "Turn line numbers on
 set t_Co=256                    "Pretty colors in terminal
+set history=1000                "Remember a lot of commands
+set display+=lastline           "Show as much of the last line as possible
+set nrformats-=octal            "No octal here
+set laststatus=2                "Show status line even with one window
 let g:session_autoload = 'no'   "don't load sessions automatically...
 let g:session_autosave = 'yes'  " ...but save them
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
 filetype off
+
+"Set invisible character representation for using :set list
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+endif
 
 "------------------------------------- Vundle Bundles
 "Setting up Vundle (NOT WORKING in windows!
@@ -65,7 +76,7 @@ endif
 
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 "github+Vundle powah!!!
@@ -114,6 +125,7 @@ Bundle 'mrtazz/simplenote.vim'
 "Bundle 'YankRing.vim' "IS BUGGY?
 Bundle 'tlib'
 Bundle 'Tagbar'
+Bundle 'matchit.zip'
 
 "Other git repos
 Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -133,10 +145,10 @@ autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 "------------------------------------
 
 let mapleader = ',' "Leader key is easier at , than \
-let g:mapleader = ',' 
+let g:mapleader = ','
 
 "Remove search highlights easily
-nnoremap <leader><Space> :noh<Cr> 
+nnoremap <leader><Space> :noh<Cr>
 
 nnoremap <leader>r :NumbersToggle<CR>
 "Toggle the numbers and retain the selection
@@ -211,7 +223,7 @@ inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
 "Good tab labels
-set guitablabel=%N\ %t\ %M 
+set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
 
 if has("gui")
@@ -298,7 +310,7 @@ set laststatus=2 "Avoid statusline appearing only in splits
 if has("win32")
     set bs=2
     set lines=41
-    set columns=124     
+    set columns=124
 endif
 
 "LaTeX stuff
@@ -315,8 +327,8 @@ let g:Tex_GotoError=0 "Don't go to errors
 "Set LaTeX viewer
 if has("unix") && match(system("uname"),'Darwin') != -1
     " It's a Mac!
-    let g:Tex_ViewRule_pdf = 'open -a Preview.app' 
-endif     
+    let g:Tex_ViewRule_pdf = 'open -a Preview.app'
+endif
 "Backup file cleaning
 
 if has("win32") || has("win64")
