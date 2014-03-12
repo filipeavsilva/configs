@@ -229,7 +229,7 @@ set guitablabel=%N\ %t\ %M
 
 if has("gui")
     "colorscheme solarized
-    colorscheme base16-default
+    colorscheme base16-bright
 
     "Hide toolbar in GUI mode
     set guioptions=egmrt
