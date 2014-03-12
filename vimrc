@@ -120,6 +120,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'mrtazz/simplenote.vim'
+Bundle 'chriskempson/base16-vim'
 
 "github/vim-scripts bundles
 "Bundle 'YankRing.vim' "IS BUGGY?
@@ -227,7 +228,8 @@ set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
 
 if has("gui")
-    colorscheme solarized
+    "colorscheme solarized
+    colorscheme base16-default
 
     "Hide toolbar in GUI mode
     set guioptions=egmrt
