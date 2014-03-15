@@ -140,7 +140,8 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
-autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *.coffee setf coffee
+autocmd BufNewFile,BufRead *.md  setf markdown
 
 "------------------------------------
 
