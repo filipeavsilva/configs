@@ -42,7 +42,7 @@ filetype off
 "Set invisible character representation for using :set list
 set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
-let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
 endif
 
 "------------------------------------- Vundle Bundles
@@ -79,10 +79,8 @@ endif
 " required!
 Bundle 'gmarik/vundle'
 
-"github+Vundle powah!!!
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-abolish'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
@@ -106,24 +104,16 @@ Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'nono/vim-handlebars'
-"Color scheme for 16-color terminal
-Bundle 'noahfrederick/vim-noctu'
 Bundle 'kien/ctrlp.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'mrtazz/simplenote.vim'
 Bundle 'chriskempson/base16-vim'
 
 "github/vim-scripts bundles
-"Bundle 'YankRing.vim' "IS BUGGY?
+Bundle 'YankRing.vim'
 Bundle 'tlib'
 Bundle 'Tagbar'
 Bundle 'matchit.zip'
@@ -228,10 +218,9 @@ inoremap <C-S-Tab> <C-o>gT
 set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
 
-if has("gui")
-    "colorscheme solarized
-    colorscheme base16-bright
+colorscheme base16-bright
 
+if has("gui")
     "Hide toolbar in GUI mode
     set guioptions=egmrt
     set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
@@ -240,10 +229,8 @@ if has("gui")
         "Don't stretch window horizontally in fullscreen mode
         "Set the backgroud color in fullscreen
         set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
-    endif
-else
-    if has("win32") || has("win64") "Mac colors are OK
-        colorscheme noctu
+        "Transparency!!!
+        set transparency=7
     endif
 endif
 
