@@ -32,6 +32,7 @@ set history=1000                "Remember a lot of commands
 set display+=lastline           "Show as much of the last line as possible
 set nrformats-=octal            "No octal here
 set laststatus=2                "Show status line even with one window
+set backspace=indent,eol,start  "Allow backspacing everywhere
 let g:session_autoload = 'no'   "don't load sessions automatically...
 let g:session_autosave = 'yes'  " ...but save them
 
@@ -311,7 +312,6 @@ set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
 if has("win32")
-    set bs=2
     set lines=41
     set columns=124
 endif
