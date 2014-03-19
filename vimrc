@@ -232,7 +232,7 @@ if has("gui")
     endif
 else
     if has("win32") || has("win64") "Mac colors are OK
-        set t_Co=256
+        set t_Co=16
         syntax on
         colorscheme noctu
     endif
