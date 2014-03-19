@@ -191,10 +191,6 @@ vnoremap Ç :
 nnoremap ç ;
 vnoremap ç ;
 
-
-"Colors
-set background=dark
-
 "Better way to work with splits
 "nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
@@ -222,6 +218,7 @@ inoremap <C-S-Tab> <C-o>gT
 set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
 
+set background=dark
 colorscheme base16-bright
 
 if has("gui")
@@ -235,9 +232,10 @@ if has("gui")
     endif
 else
     if has("win32") || has("win64") "Mac colors are OK
+        set t_Co=256
+        syntax on
         colorscheme noctu
     endif
-endif
 endif
 
 
