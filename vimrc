@@ -112,6 +112,9 @@ Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'chriskempson/base16-vim'
+if has("win32") || has("win64")
+    Bundle 'noahfrederick/vim-noctu'
+endif
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
@@ -227,12 +230,14 @@ if has("gui")
     set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
     if has("mac") "Options for MacVim
-        "Don't stretch window horizontally in fullscreen mode
-        "Set the backgroud color in fullscreen
-        set fuoptions=maxvert,background:#FF002b36 "TODO: Set this dynamically to the bg color of the color scheme
         "Transparency!!!
         set transparency=7
     endif
+else
+    if has("win32") || has("win64") "Mac colors are OK
+        colorscheme noctu
+    endif
+endif
 endif
 
 
