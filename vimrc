@@ -255,6 +255,11 @@ endif
 "Change to a buffer's directory on entering
 autocmd BufEnter * silent! lcd %:p:h
 
+"Open multiple files in tabs by default, if it's not a diff
+if (&diff==0)
+    :autocmd BufReadPost * tab ball
+endif
+
 "****************** Quickfix window *************************************
 function! QFixToggle()
     if exists("g:qfix_win")
