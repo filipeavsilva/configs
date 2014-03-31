@@ -123,7 +123,7 @@ Bundle 'Tagbar'
 Bundle 'matchit.zip'
 
 "Other git repos
-Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+"Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -239,7 +239,6 @@ else
 endif
 
 
-autocmd FileType tex setlocal spell "latex
 autocmd BufNewFile,BufRead *.txt setlocal spell
 
 "Limit syntax highlighting to a few lines, to avoid slowing on files with long lines
@@ -256,9 +255,9 @@ endif
 autocmd BufEnter * silent! lcd %:p:h
 
 "Open multiple files in tabs by default, if it's not a diff
-if (&diff==0)
-    :autocmd BufReadPost * tab ball
-endif
+"if (&diff==0)
+    ":autocmd BufReadPost * tab ball
+"endif
 
 "****************** Quickfix window *************************************
 function! QFixToggle()
@@ -311,40 +310,17 @@ if has("win32")
     set columns=124
 endif
 
-"LaTeX stuff
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-let g:Tex_GotoError=0 "Don't go to errors
+"Load LaTeX stuff when needed
+let g:latex_configs_loaded=0
+function! LoadLatexConfigs()
+	if g:latex_configs_loaded == 0
+		so ~/.vimrc_latex
+		let g:latex_configs_loaded=1
+	endif
+endfunction
 
-"Set LaTeX viewer
-if has("unix") && match(system("uname"),'Darwin') != -1
-    " It's a Mac!
-    let g:Tex_ViewRule_pdf = 'open -a Preview.app'
-endif
-"Backup file cleaning
-
-if has("win32") || has("win64")
-    silent execute '!mkdir '.$HOME.'\vimfiles\backupfiles'
-    silent execute '!mkdir '.$HOME.'\vimfiles\swapfiles'
-    set backupdir=$HOME/vimfiles/backupfiles//
-    set directory=$HOME/vimfiles/swapfiles//
-    if exists("+undofile")
-        silent execute '!mkdir '.$HOME.'\vimfiles\undofiles'
-        set undodir=$HOME/vimfiles/undofiles//
-    endif
-else "mac, unix
-    set backupdir=~/.vim/backupfiles//
-    set directory=~/.vim/swapfiles//
-    if exists("+undofile")
-        set undodir=~/.vim/undofiles//
-    endif
-endif
+autocmd BufEnter *.tex call LoadLatexConfigs()
+autocmd BufEnter *.latex call LoadLatexConfigs()
 
 "Abbreviations (using Abolish.vim)
 if exists('g:loaded_abolish')
