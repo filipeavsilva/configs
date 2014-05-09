@@ -214,6 +214,17 @@ onoremap <C-S-Tab> gT
 inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
+"Map Ctrl+Z, Ctrl+C and Ctrl+V back to undo, copy and paste, in windows
+if has("win32") || has("win64")
+    vnoremap <C-c> "+y
+    noremap <C-v> "+p
+    "Keep the old <C-v> behavior in <C-S-v>
+    inoremap <C-S-v> <C-v>
+    inoremap <C-v> <C-r>+
+    noremap <C-z> u
+    inoremap <C-z> <C-o>u
+endif
+
 "Good tab labels
 set guitablabel=%N\ %t\ %M
 "Set spelling automatically for certain file types
