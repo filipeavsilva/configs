@@ -217,9 +217,10 @@ inoremap <C-S-Tab> <C-o>gT
 "Map Ctrl+Z, Ctrl+C and Ctrl+V back to undo, copy and paste, in windows
 if has("win32") || has("win64")
     vnoremap <C-c> "+y
+    "Keep the old <C-v> behavior in <M-v>
+    noremap <M-v> <C-v>
+    inoremap <M-v> <C-v>
     noremap <C-v> "+p
-    "Keep the old <C-v> behavior in <C-S-v>
-    inoremap <C-S-v> <C-v>
     inoremap <C-v> <C-r>+
     noremap <C-z> u
     inoremap <C-z> <C-o>u
