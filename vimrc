@@ -121,6 +121,10 @@ Bundle 'YankRing.vim'
 Bundle 'tlib'
 Bundle 'Tagbar'
 Bundle 'matchit.zip'
+if !empty($VIMWIKI_PATH)
+    Bundle 'vimwiki'
+    let g:vimwiki_list = [{'path': $VIMWIKI_PATH}]
+endif
 
 "Other git repos
 "Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
