@@ -15,6 +15,7 @@ choco install 1password
 choco install vim
 choco install clipx
 choco install autohotkey
+choco install baretail
 
 rem get my configs
 git clone https://github.com/Darchangel/configs.git %home%\configs
