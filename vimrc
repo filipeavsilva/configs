@@ -105,7 +105,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
-Bundle 'mattn/zencoding-vim'
+Bundle 'emmet.vim'
 Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
@@ -243,7 +243,6 @@ if has("gui")
     set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
     if has("mac") "Options for MacVim
-        "Transparency!!!
         set transparency=7
     endif
 else
