@@ -18,6 +18,8 @@ choco install autohotkey
 choco install baretail
 
 rem get my configs
-git clone https://github.com/Darchangel/configs.git %home%\configs
-mklink %home%\configs\vimrc %home%\_vimrc
-mklink %home%\configs\Autohotkey.ahk %USERPROFILE%\Documents\Autohotkey.ahk
+"%programfiles(x86)%\Git\bin\git" clone https://github.com/Darchangel/configs.git %homepath%\configs
+mkdir %homepath%\.vim
+mklink /D %homepath%\vimfiles %homepath%\.vim
+mklink %homepath%\_vimrc %homepath%\configs\vimrc
+mklink %USERPROFILE%\Documents\Autohotkey.ahk %homepath%\configs\Autohotkey.ahk
