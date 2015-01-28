@@ -81,11 +81,6 @@ endif
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-abolish'
-Bundle 'skammer/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'groenewege/vim-less'
 "Dependency for vim-session
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
@@ -103,13 +98,11 @@ Bundle 'chrismetcalf/vim-rainbow'
 "Not quite working correctly...
 Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
-Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'kien/ctrlp.vim'
+"Bundle 'kien/ctrlp.vim'
 Bundle 'chriskempson/base16-vim'
 if has("win32") || has("win64")
     Bundle 'noahfrederick/vim-noctu'
@@ -117,13 +110,8 @@ endif
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
-Bundle 'tlib'
-Bundle 'Tagbar'
 Bundle 'matchit.zip'
-if !empty($VIMWIKI_PATH)
-    Bundle 'vimwiki'
-    let g:vimwiki_list = [{'path': $VIMWIKI_PATH}]
-endif
+Bundle 'Tagbar'
 
 "Other git repos
 "Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -238,7 +226,7 @@ colorscheme base16-bright
 
 if has("gui")
     "Hide toolbar in GUI mode
-    set guioptions=egmrt
+    set guioptions=egrt
     set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
     if has("mac") "Options for MacVim
@@ -303,11 +291,6 @@ nnoremap <F5> :GundoToggle<CR>
 "let g:yankring_history_file = '.vim/.yankring_history'
 "endif
 
-"********************* Simplenote *******************
-if filereadable("~/.simplenote")
-    so ~/.simplenote
-endif
-
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
 
@@ -335,8 +318,3 @@ endfunction
 
 autocmd BufEnter *.tex call LoadLatexConfigs()
 autocmd BufEnter *.latex call LoadLatexConfigs()
-
-"Abbreviations (using Abolish.vim)
-if exists('g:loaded_abolish')
-    Abolish functino function
-endif
