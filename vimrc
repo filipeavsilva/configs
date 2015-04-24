@@ -126,8 +126,10 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
-autocmd BufNewFile,BufRead *.coffee setf coffee
 autocmd BufNewFile,BufRead *.md  setf markdown
+
+"Default to markdown if files have no ft
+autocmd BufEnter * if &filetype == "" | setlocal ft=markdown | endif
 
 "------------------------------------
 
