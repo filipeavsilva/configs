@@ -11,7 +11,6 @@ choco install toastify
 choco install notepadplusplus
 choco install dropbox
 choco install keepass
-choco install 1password
 choco install vim
 choco install clipx
 choco install autohotkey

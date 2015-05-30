@@ -206,7 +206,7 @@ colorscheme base16-bright
 
 if has("gui")
     "Hide toolbar in GUI mode
-    set guioptions=egmrt
+    set guioptions=egrt
     set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
     if has("mac") "Options for MacVim
