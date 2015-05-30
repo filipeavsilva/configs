@@ -81,11 +81,6 @@ endif
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-abolish'
-Bundle 'skammer/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'groenewege/vim-less'
 "Dependency for vim-session
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
@@ -103,13 +98,10 @@ Bundle 'chrismetcalf/vim-rainbow'
 "Not quite working correctly...
 Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'garbas/vim-snipmate'
 Bundle 'tpope/vim-surround'
-Bundle 'nelstrom/vim-markdown-preview'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'kien/ctrlp.vim'
 Bundle 'chriskempson/base16-vim'
 if has("win32") || has("win64")
     Bundle 'noahfrederick/vim-noctu'
@@ -117,16 +109,6 @@ endif
 
 "github/vim-scripts bundles
 Bundle 'YankRing.vim'
-Bundle 'tlib'
-Bundle 'Tagbar'
-Bundle 'matchit.zip'
-if !empty($VIMWIKI_PATH)
-    Bundle 'vimwiki'
-    let g:vimwiki_list = [{'path': $VIMWIKI_PATH}]
-endif
-
-"Other git repos
-"Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -152,20 +134,6 @@ nnoremap <leader><Space> :noh<Cr>
 nnoremap <leader>r :NumbersToggle<CR>
 "Toggle the numbers and retain the selection
 vnoremap <leader>r :<C-U>NumbersToggle<CR>gv
-
-"Toggle fullscreen
-fu! ToggleFU()
-    if &fullscreen
-        set nofu
-        set guioptions+=r "add scrollbar
-    else
-        set fu
-        set guioptions-=r "remove scrollbar
-    endif
-endfunction
-
-nnoremap <M-Return> :call ToggleFU()<CR>
-vnoremap <M-Return> :call ToggleFU()<CR>
 
 "Set up and down keys to move by screen line and not file line
 nnoremap j gj
@@ -273,21 +241,6 @@ autocmd BufEnter * silent! lcd %:p:h
     ":autocmd BufReadPost * tab ball
 "endif
 
-"****************** Quickfix window *************************************
-function! QFixToggle()
-    if exists("g:qfix_win")
-        cclose
-        unlet g:qfix_win
-    else
-        botright copen
-        let g:qfix_win = bufnr("$")
-    endif
-endfunction
-
-map <leader>. :call QFixToggle()<cr>
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-
 "Save and load folds when leaving/entering
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
@@ -295,18 +248,6 @@ au BufWinEnter * silent! loadview
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
-
-"Change Yankring history file location
-"if has("win32")
-"let g:yankring_history_file = 'vimfiles/.yankring_history'
-"else
-"let g:yankring_history_file = '.vim/.yankring_history'
-"endif
-
-"********************* Simplenote *******************
-if filereadable("~/.simplenote")
-    so ~/.simplenote
-endif
 
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
@@ -324,19 +265,3 @@ if has("win32")
     set columns=124
 endif
 
-"Load LaTeX stuff when needed
-let g:latex_configs_loaded=0
-function! LoadLatexConfigs()
-	if g:latex_configs_loaded == 0
-		so ~/.vimrc_latex
-		let g:latex_configs_loaded=1
-	endif
-endfunction
-
-autocmd BufEnter *.tex call LoadLatexConfigs()
-autocmd BufEnter *.latex call LoadLatexConfigs()
-
-"Abbreviations (using Abolish.vim)
-if exists('g:loaded_abolish')
-    Abolish functino function
-endif
