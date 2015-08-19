@@ -143,20 +143,6 @@ nnoremap <leader>r :NumbersToggle<CR>
 "Toggle the numbers and retain the selection
 vnoremap <leader>r :<C-U>NumbersToggle<CR>gv
 
-"Toggle fullscreen
-fu! ToggleFU()
-    if &fullscreen
-        set nofu
-        set guioptions+=r "add scrollbar
-    else
-        set fu
-        set guioptions-=r "remove scrollbar
-    endif
-endfunction
-
-nnoremap <M-Return> :call ToggleFU()<CR>
-vnoremap <M-Return> :call ToggleFU()<CR>
-
 "Set up and down keys to move by screen line and not file line
 nnoremap j gj
 nnoremap k gk
