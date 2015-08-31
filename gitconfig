@@ -1,0 +1,23 @@
+[user]
+	name = Filipe Silva
+	email = f.silva@coolblue.nl
+[core]
+	autocrlf = true
+	excludesfile = C:\\Users\\Filipe\\.gitignore_global
+	trustctime = false
+[alias]
+	ci = commit
+	st = status
+	co = checkout
+	lga = log --graph --oneline --all --decorate
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files/Perforce/p4merge.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/Perforce/p4merge.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = true
+[merge]
+	tool = p4merge
+[diff]
+	tool = p4merge
+[push]
+	default = current
