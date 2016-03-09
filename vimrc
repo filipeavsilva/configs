@@ -34,8 +34,6 @@ set nrformats-=octal            "No octal here
 set laststatus=2                "Show status line even with one window
 set backspace=indent,eol,start  "Allow backspacing everywhere
 set clipboard=unnamed           "Use the system's clipboard by default
-let g:session_autoload = 'no'   "don't load sessions automatically...
-let g:session_autosave = 'yes'  " ...but save them
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
