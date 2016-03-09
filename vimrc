@@ -33,6 +33,7 @@ set display+=lastline           "Show as much of the last line as possible
 set nrformats-=octal            "No octal here
 set laststatus=2                "Show status line even with one window
 set backspace=indent,eol,start  "Allow backspacing everywhere
+set clipboard=unnamed           "Use the system's clipboard by default
 let g:session_autoload = 'no'   "don't load sessions automatically...
 let g:session_autosave = 'yes'  " ...but save them
 
@@ -88,9 +89,9 @@ Bundle 'xolox/vim-session'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidoc/taskpaper.vim'
 "Deprecated version...
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 "Upcoming, beta version. Uncomment when ready
-"Bundle 'Lokaltog/powerline'
+Bundle 'powerline/powerline'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
@@ -242,8 +243,8 @@ autocmd BufEnter * silent! lcd %:p:h
 "endif
 
 "Save and load folds when leaving/entering
-au BufWinLeave * silent! mkview
-au BufWinEnter * silent! loadview
+"au BufWinLeave * silent! mkview
+"au BufWinEnter * silent! loadview
 
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
