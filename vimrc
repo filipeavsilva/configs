@@ -26,7 +26,8 @@ set autoread                    "Auto-load external changes to files
 set cindent                     "C-style indents
 set hidden                      "Hide buffers instead of closing them
 set wildmenu                    "Command completion menu
-set nu                          "Turn line numbers on
+set number                      "Turn line numbers on
+set relativenumber              " ...and relative numbering
 set t_Co=256                    "Pretty colors in terminal
 set history=1000                "Remember a lot of commands
 set display+=lastline           "Show as much of the last line as possible
@@ -35,7 +36,7 @@ set laststatus=2                "Show status line even with one window
 set backspace=indent,eol,start  "Allow backspacing everywhere
 set clipboard=unnamed           "Use the system's clipboard by default
 let g:session_autoload = 'no'   "don't load sessions automatically...
-let g:session_autosave = 'yes'  " ...but save them
+let g:session_autosave = 'no'   " ...nor save them
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
@@ -82,12 +83,7 @@ endif
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
-"Dependency for vim-session
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
-
 Bundle 'scrooloose/syntastic'
-Bundle 'davidoc/taskpaper.vim'
 "Deprecated version...
 "Bundle 'Lokaltog/vim-powerline'
 "Upcoming, beta version. Uncomment when ready
@@ -96,11 +92,8 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chrismetcalf/vim-rainbow'
-"Not quite working correctly...
 Bundle 'tpope/vim-repeat'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tpope/vim-surround'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'chriskempson/base16-vim'
@@ -255,6 +248,9 @@ command! NT :NERDTreeTabsToggle
 
 let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
 let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
+let NERDTreeAutoCenter          = 1 "auto center is on
+let NERDTreeCaseSensitiveSort   = 1 "case sensitive sorting is on
+let NERDTreeChDirMode           = 2 "set the CWD to the current root
 
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
