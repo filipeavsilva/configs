@@ -51,7 +51,7 @@ endif
 "------------------------------------- Vundle Bundles
 "Setting up Vundle (NOT WORKING in windows!
 let iCanHazVundle=1
-if has("win32") || has("win64")
+if has("win32") || has("win64") || has("win16")
     let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
 else
     let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
@@ -59,7 +59,7 @@ endif
 if !filereadable(vundle_readme)
     echo "Installing Vundle.."
     echo ""
-    if has("win32") || has("win64")
+    if has("win32") || has("win64") || has("win16")
         silent !mkdir -p $HOME/vimfiles/bundle
         silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
     else
@@ -97,7 +97,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'godlygeek/csapprox'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'chriskempson/base16-vim'
-if has("win32") || has("win64")
+if has("win32") || has("win64") || has("win16")
     Bundle 'noahfrederick/vim-noctu'
 endif
 
@@ -114,7 +114,6 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 "Fix some file detection nonsense
-autocmd BufNewFile,BufRead *.coffee setf coffee
 autocmd BufNewFile,BufRead *.md  setf markdown
 
 "------------------------------------
@@ -180,7 +179,7 @@ inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
 "Map Ctrl+Z, Ctrl+C and Ctrl+V back to undo, copy and paste, in windows
-if has("win32") || has("win64")
+if has("win32") || has("win64") || has("win16")
     vnoremap <C-c> "+y
     "Keep the old <C-v> behavior in <M-v>
     noremap <M-v> <C-v>
@@ -207,7 +206,7 @@ if has("gui")
         set transparency=7
     endif
 else
-    if has("win32") || has("win64") "Mac colors are OK
+    if has("win32") || has("win64") || has("win16") "Mac colors are OK
         set t_Co=16
         syntax on
         colorscheme noctu
@@ -223,21 +222,12 @@ set synmaxcol=200
 "Refer to the directory of the current file in command mode
 cabbr <expr> %% expand('%:p:h')
 
-if has("win32") || has("win64") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
+if has("win32") || has("win64") || has("win16") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
     lcd $HOME
 endif
 
 "Change to a buffer's directory on entering
 autocmd BufEnter * silent! lcd %:p:h
-
-"Open multiple files in tabs by default, if it's not a diff
-"if (&diff==0)
-    ":autocmd BufReadPost * tab ball
-"endif
-
-"Save and load folds when leaving/entering
-"au BufWinLeave * silent! mkview
-"au BufWinEnter * silent! loadview
 
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
@@ -257,7 +247,7 @@ let g:Powerline_symbols = 'fancy'
 set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
-if has("win32")
+if has("win32") || has("win64") || has("win16")
     set lines=41
     set columns=124
 endif
