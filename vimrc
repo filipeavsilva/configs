@@ -85,9 +85,8 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 "Deprecated version...
-"Bundle 'Lokaltog/vim-powerline'
-"Upcoming, beta version. Uncomment when ready
-Bundle 'powerline/powerline'
+"Bundle 'powerline/powerline'
+Bundle 'vim-airline/vim-airline'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/nerdtree'
@@ -200,7 +199,13 @@ colorscheme base16-bright
 if has("gui")
     "Hide toolbar in GUI mode
     set guioptions=egrt
-    set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
+    set antialias "Smooth...
+
+    if has("win32") || has("win64") || has("win16")
+        set guifont=Powerline_Consolas:h9:cANSI
+    else
+        set guifont=Powerline\ Consolas:h12
+    endif
 
     if has("mac") "Options for MacVim
         set transparency=7
@@ -228,6 +233,34 @@ endif
 
 "Change to a buffer's directory on entering
 autocmd BufEnter * silent! lcd %:p:h
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+if !isdirectory($HOME . "/.vim/backup")
+    if has("win64") || has("win32") || has("win16")
+        silent !mkdir $HOME/.vim/backup
+    else
+        silent !mkdir -p $HOME/.vim/backup
+    endif
+endif
+
+if !isdirectory($HOME . "/.vim/swap")
+    if has("win64") || has("win32") || has("win16")
+        silent !mkdir $HOME/.vim/swap
+    else
+        silent !mkdir -p $HOME/.vim/swap
+    endif
+endif
+
+if !isdirectory($HOME . "/.vim/backup")
+    if has("win64") || has("win32") || has("win16")
+        silent !mkdir $HOME/.vim/undo
+    else
+        silent !mkdir -p $HOME/.vim/undo
+    endif
+endif
 
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
