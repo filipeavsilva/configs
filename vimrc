@@ -1,6 +1,6 @@
 "Useful stuff
-set nocompatible                "No compatibility with old vi mode
-set modelines=0                 "Avoid some kind of exploits... better let it be
+set nocompatible
+set modelines=0
 
 "Misc options
 set hls                         "Highlight search
@@ -26,17 +26,15 @@ set autoread                    "Auto-load external changes to files
 set cindent                     "C-style indents
 set hidden                      "Hide buffers instead of closing them
 set wildmenu                    "Command completion menu
-set number                      "Turn line numbers on
-set relativenumber              " ...and relative numbering
+set nu                          "Turn line numbers on
 set t_Co=256                    "Pretty colors in terminal
 set history=1000                "Remember a lot of commands
 set display+=lastline           "Show as much of the last line as possible
 set nrformats-=octal            "No octal here
 set laststatus=2                "Show status line even with one window
 set backspace=indent,eol,start  "Allow backspacing everywhere
-set clipboard=unnamed           "Use the system's clipboard by default
 let g:session_autoload = 'no'   "don't load sessions automatically...
-let g:session_autosave = 'no'   " ...nor save them
+let g:session_autosave = 'yes'  " ...but save them
 
 syntax on
 filetype on "Ensure filetype is on before turning off. Used to avoid returning an error, which prevents using vim as the git commit message editor
@@ -49,68 +47,56 @@ if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
 endif
 
 "------------------------------------- Vundle Bundles
-"Setting up Vundle (NOT WORKING in windows!
-let iCanHazVundle=1
-if has("win32") || has("win64") || has("win16")
-    let vundle_readme=expand("$HOME/vimfiles/bundle/vundle/README.md")
-else
-    let vundle_readme=expand("$HOME/.vim/bundle/vundle/README.md")
-endif
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    if has("win32") || has("win64") || has("win16")
-        silent !mkdir -p $HOME/vimfiles/bundle
-        silent !git clone https://github.com/gmarik/vundle $HOME/vimfiles/bundle/vundle
-    else
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    endif
-    let iCanHazVundle=0
-endif
-
-if has("win32") || has("win64")
-    set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#rc()
-else
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+"Dependency for vim-session
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+
+Plugin 'scrooloose/syntastic'
+Plugin 'davidoc/taskpaper.vim'
 "Deprecated version...
-"Bundle 'powerline/powerline'
-Bundle 'vim-airline/vim-airline'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'sjl/gundo.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'chrismetcalf/vim-rainbow'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'godlygeek/csapprox'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'chriskempson/base16-vim'
-if has("win32") || has("win64") || has("win16")
-    Bundle 'noahfrederick/vim-noctu'
+Plugin 'Lokaltog/vim-powerline'
+"Upcoming, beta version. Uncomment when ready
+"Plugin 'Lokaltog/powerline'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'sjl/gundo.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'chrismetcalf/vim-rainbow'
+"Not quite working correctly...
+Plugin 'tpope/vim-repeat'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tpope/vim-surround'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'godlygeek/csapprox'
+Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'chriskempson/base16-vim'
+if has("win32") || has("win64")
+    Plugin 'noahfrederick/vim-noctu'
 endif
+
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'PProvost/vim-ps1'
 
 "github/vim-scripts bundles
-Bundle 'YankRing.vim'
+Plugin 'YankRing.vim'
+Plugin 'matchit.zip'
+Plugin 'Tagbar'
 
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
-
+call vundle#end()
 filetype plugin indent on
+
 set omnifunc=syntaxcomplete#Complete
+let g:OmniSharp_selector_ui = 'ctrlp'
 
 "Fix some file detection nonsense
 autocmd BufNewFile,BufRead *.md  setf markdown
@@ -181,7 +167,7 @@ inoremap <C-Tab> <C-o>gt
 inoremap <C-S-Tab> <C-o>gT
 
 "Map Ctrl+Z, Ctrl+C and Ctrl+V back to undo, copy and paste, in windows
-if has("win32") || has("win64") || has("win16")
+if has("win32") || has("win64")
     vnoremap <C-c> "+y
     "Keep the old <C-v> behavior in <M-v>
     noremap <M-v> <C-v>
@@ -202,19 +188,13 @@ colorscheme base16-bright
 if has("gui")
     "Hide toolbar in GUI mode
     set guioptions=egrt
-    set antialias "Smooth...
-
-    if has("win32") || has("win64") || has("win16")
-        set guifont=Powerline_Consolas:h9:cANSI
-    else
-        set guifont=Powerline\ Consolas:h12
-    endif
+    set guifont=Consolas_for_Powerline_FixedD:h9:cANSI
 
     if has("mac") "Options for MacVim
         set transparency=7
     endif
 else
-    if has("win32") || has("win64") || has("win16") "Mac colors are OK
+    if has("win32") || has("win64") "Mac colors are OK
         set t_Co=16
         syntax on
         colorscheme noctu
@@ -230,60 +210,60 @@ set synmaxcol=200
 "Refer to the directory of the current file in command mode
 cabbr <expr> %% expand('%:p:h')
 
-if has("win32") || has("win64") || has("win16") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
+if has("win32") || has("win64") "Windows has the nasty habit of setting the pwd to C:\Windows\System32
     lcd $HOME
 endif
 
 "Change to a buffer's directory on entering
 autocmd BufEnter * silent! lcd %:p:h
 
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+"Open multiple files in tabs by default, if it's not a diff
+"if (&diff==0)
+    ":autocmd BufReadPost * tab ball
+"endif
 
-if !isdirectory($HOME . "/.vim/backup")
-    if has("win64") || has("win32") || has("win16")
-        silent !mkdir $HOME/.vim/backup
+"****************** Quickfix window *************************************
+function! QFixToggle()
+    if exists("g:qfix_win")
+        cclose
+        unlet g:qfix_win
     else
-        silent !mkdir -p $HOME/.vim/backup
+        botright copen
+        let g:qfix_win = bufnr("$")
     endif
-endif
+endfunction
 
-if !isdirectory($HOME . "/.vim/swap")
-    if has("win64") || has("win32") || has("win16")
-        silent !mkdir $HOME/.vim/swap
-    else
-        silent !mkdir -p $HOME/.vim/swap
-    endif
-endif
+map <leader>. :call QFixToggle()<cr>
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
 
-if !isdirectory($HOME . "/.vim/backup")
-    if has("win64") || has("win32") || has("win16")
-        silent !mkdir $HOME/.vim/undo
-    else
-        silent !mkdir -p $HOME/.vim/undo
-    endif
-endif
+"Save and load folds when leaving/entering
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview
 
 "****************** PLUGINS *****************
 "Show/Hide Gundo undo graph
 nnoremap <F5> :GundoToggle<CR>
+
+"Change Yankring history file location
+"if has("win32")
+"let g:yankring_history_file = 'vimfiles/.yankring_history'
+"else
+"let g:yankring_history_file = '.vim/.yankring_history'
+"endif
 
 "********************* NERDTree *******************
 command! NT :NERDTreeTabsToggle
 
 let g:nerdtree_tabs_open_on_gui_startup = 0 "Don't open unless I want to
 let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
-let NERDTreeAutoCenter          = 1 "auto center is on
-let NERDTreeCaseSensitiveSort   = 1 "case sensitive sorting is on
-let NERDTreeChDirMode           = 2 "set the CWD to the current root
 
 "******** vim-powerline **********
 let g:Powerline_symbols = 'fancy'
 set laststatus=2 "Avoid statusline appearing only in splits
 
 "Windows-specific stuff
-if has("win32") || has("win64") || has("win16")
+if has("win32")
     set lines=41
     set columns=124
 endif
