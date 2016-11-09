@@ -10,6 +10,7 @@
 	st = status
 	co = checkout
 	lga = log --graph --oneline --all --decorate
+    rum = pull --rebase upstream master
 [difftool "sourcetree"]
 	cmd = 'C:/Program Files/Perforce/p4merge.exe' \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
