@@ -123,7 +123,7 @@ nnoremap <Down> gj
 nnoremap <Up> gk
 
 "Avoid pressing <Esc>
-inoremap jk <Esc>
+inoremap jj <Esc>
 
 "Compensate for errors when running commands
 command! W :w
@@ -268,3 +268,14 @@ if has("win32")
     set columns=124
 endif
 
+"Load LaTeX stuff when needed
+let g:latex_configs_loaded=0
+function! LoadLatexConfigs()
+	if g:latex_configs_loaded == 0
+		so ~/.vimrc_latex
+		let g:latex_configs_loaded=1
+	endif
+endfunction
+
+autocmd BufEnter *.tex call LoadLatexConfigs()
+autocmd BufEnter *.latex call LoadLatexConfigs()
