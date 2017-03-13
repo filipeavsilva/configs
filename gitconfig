@@ -1,24 +1,37 @@
 [user]
 	name = Filipe Silva
 	email = f.silva@coolblue.nl
+
 [core]
 	autocrlf = true
 	excludesfile = C:\\Users\\Filipe\\.gitignore_global
 	trustctime = false
+    editor = 'C:\\Program Files (x86)\\Vim\\vim80\\gvim.exe' -f -i NONE
+
+[push]
+	default = current
+
 [alias]
 	ci = commit
 	st = status
 	co = checkout
 	lga = log --graph --oneline --all --decorate
-    rum = pull --rebase upstream master
-[difftool "sourcetree"]
-	cmd = 'C:/Program Files/Perforce/p4merge.exe' \"$LOCAL\" \"$REMOTE\"
-[mergetool "sourcetree"]
-	cmd = 'C:/Program Files/Perforce/p4merge.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-	trustExitCode = true
-[merge]
-	tool = p4merge
+    rum = !git stash && git pull --rebase upstream master && git stash pop
+
 [diff]
-	tool = p4merge
-[push]
-	default = current
+	tool = vsdiffmerge
+[difftool]
+	prompt = true
+[difftool "vsdiffmerge"]
+	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+	keepbackup = false
+	trustexistcode = true
+
+[merge]
+	tool = vsdiffmerge
+[mergetool]
+	prompt = true
+[mergetool "vsdiffmerge"]
+	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+	keepbackup = false
+	trustexistcode = true
