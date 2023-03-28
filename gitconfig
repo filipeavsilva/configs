@@ -1,37 +1,28 @@
 [user]
 	name = Filipe Silva
-	email = f.silva@coolblue.nl
+	email = <email>
 
 [core]
 	autocrlf = true
-	excludesfile = C:\\Users\\Filipe\\.gitignore_global
 	trustctime = false
-    editor = 'C:\\Program Files (x86)\\Vim\\vim80\\gvim.exe' -f -i NONE
+	editor = \"C:\\Users\\filip\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
 
 [push]
 	default = current
 
 [alias]
+	co = checkout
 	ci = commit
 	st = status
-	co = checkout
+	save = !git add -A && git commit -m '*** SAVEPOINT ***'
+	undo = reset HEAD~1 --mixed
 	lga = log --graph --oneline --all --decorate
-    rum = !git stash && git pull --rebase upstream master && git stash pop
 
-[diff]
-	tool = vsdiffmerge
-[difftool]
-	prompt = true
-[difftool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
-	keepbackup = false
-	trustexistcode = true
+	# Aliases to allow rebasing a branch onto master without switching around
+	get-master-remote = !"if git remote | grep -q upstream; then echo upstream; else echo origin; fi"
+	currently-at-master = !"[[ $(git rev-parse --abbrev-ref HEAD) == 'master' ]]"
+	pull-master = !"if git currently-at-master; then git pull $(git get-master-remote) master; else git fetch $(git get-master-remote) master:master; fi"
+	rebase-master = !git pull-master && git stash push -m \"_rebase-savepoint\" : && git rebase master && (git stash apply stash^{/_rebase-savepoint} && git stash drop stash@{0}) 2> /dev/null
 
-[merge]
-	tool = vsdiffmerge
-[mergetool]
-	prompt = true
-[mergetool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
-	keepbackup = false
-	trustexistcode = true
+[rebase]
+	updateRefs = true
