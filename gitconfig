@@ -19,10 +19,12 @@
 	lga = log --graph --oneline --all --decorate
 
 	# Aliases to allow rebasing a branch onto master without switching around
-	get-master-remote = !"if git remote | grep -q upstream; then echo upstream; else echo origin; fi"
+	get-master-remote = !"if git remote | grep -q UPSTREAM; then echo UPSTREAM; else echo origin; fi"
 	currently-at-master = !"[[ $(git rev-parse --abbrev-ref HEAD) == 'master' ]]"
 	pull-master = !"if git currently-at-master; then git pull $(git get-master-remote) master; else git fetch $(git get-master-remote) master:master; fi"
-	rebase-master = !git pull-master && git stash push -m \"_rebase-savepoint\" : && git rebase master && (git stash apply stash^{/_rebase-savepoint} && git stash drop stash@{0}) 2> /dev/null
+	stash-savepoint-if-needed = !"[ -z '$(git status --porcelain)' ] || git stash push -uqm '_rebase-savepoint'"
+	restore-savepoint = !"if git stash list | grep -q _rebase-savepoint; then git stash apply stash^{/_rebase-savepoint} && git stash drop stash@{0}; else true; fi"
+	rebase-master = !"if git currently-at-master; then git stash-savepoint-if-needed && git pull-master && git restore-savepoint; else git pull-master && git stash-savepoint-if-needed && git rebase master && git restore-savepoint; fi"
 
 [rebase]
 	updateRefs = true
